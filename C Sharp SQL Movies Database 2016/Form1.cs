@@ -49,8 +49,8 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             //these are the cell clicks for the values in the row that you click on
             try {
                 OwnerID = (int)DGVOwner.Rows[e.RowIndex].Cells[0].Value;
-                OwnerFN = (string)DGVOwner.Rows[e.RowIndex].Cells[1].Value;
-                OwnerLN = DGVOwner.Rows[e.RowIndex].Cells[2].Value as string;
+                OwnerFN = DGVOwner.Rows[e.RowIndex].Cells[1].Value.ToString();
+                OwnerLN = DGVOwner.Rows[e.RowIndex].Cells[2].Value.ToString();
                 //if you are clicking on a row and not outside it
                 if (e.RowIndex >= 0) {
                     //Fill the next CD DGV with the OwnerID
@@ -382,6 +382,10 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
 
         private void DGVOwner_CellContentClick_1(object sender, DataGridViewCellEventArgs e) {
+            }
+
+        private void button1_Click(object sender, EventArgs e) {
+
             }
         }
     }

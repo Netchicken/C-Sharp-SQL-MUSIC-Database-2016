@@ -52,16 +52,17 @@
             this.Label2 = new System.Windows.Forms.Label();
             this.Label1 = new System.Windows.Forms.Label();
             this.Owners = new System.Windows.Forms.Label();
-            this.DGVOwner = new System.Windows.Forms.DataGridView();
             this.DGVtracks = new System.Windows.Forms.DataGridView();
             this.TextBox2 = new System.Windows.Forms.TextBox();
             this.TextBox1 = new System.Windows.Forms.TextBox();
             this.ComboBox1 = new System.Windows.Forms.ComboBox();
             this.lbgenre = new System.Windows.Forms.ListBox();
             this.DGVCD = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).BeginInit();
+            this.DGVOwner = new System.Windows.Forms.DataGridView();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).BeginInit();
             this.SuspendLayout();
             // 
             // Label5
@@ -305,7 +306,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Label2.Location = new System.Drawing.Point(644, 101);
+            this.Label2.Location = new System.Drawing.Point(645, 87);
             this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(78, 25);
@@ -329,30 +330,22 @@
             this.Owners.AutoSize = true;
             this.Owners.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Owners.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Owners.Location = new System.Drawing.Point(95, 97);
+            this.Owners.Location = new System.Drawing.Point(96, 87);
             this.Owners.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Owners.Name = "Owners";
             this.Owners.Size = new System.Drawing.Size(86, 25);
             this.Owners.TabIndex = 44;
             this.Owners.Text = "Owners";
             // 
-            // DGVOwner
-            // 
-            this.DGVOwner.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVOwner.Location = new System.Drawing.Point(64, 126);
-            this.DGVOwner.Margin = new System.Windows.Forms.Padding(4);
-            this.DGVOwner.Name = "DGVOwner";
-            this.DGVOwner.Size = new System.Drawing.Size(492, 153);
-            this.DGVOwner.TabIndex = 43;
-            // 
             // DGVtracks
             // 
             this.DGVtracks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVtracks.Location = new System.Drawing.Point(581, 129);
+            this.DGVtracks.Location = new System.Drawing.Point(581, 115);
             this.DGVtracks.Margin = new System.Windows.Forms.Padding(4);
             this.DGVtracks.Name = "DGVtracks";
-            this.DGVtracks.Size = new System.Drawing.Size(415, 327);
+            this.DGVtracks.Size = new System.Drawing.Size(415, 341);
             this.DGVtracks.TabIndex = 42;
+            this.DGVtracks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVtracks_CellContentClick);
             // 
             // TextBox2
             // 
@@ -397,12 +390,35 @@
             this.DGVCD.Name = "DGVCD";
             this.DGVCD.Size = new System.Drawing.Size(497, 149);
             this.DGVCD.TabIndex = 37;
+            this.DGVCD.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVCD_CellContentClick);
+            // 
+            // DGVOwner
+            // 
+            this.DGVOwner.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGVOwner.Location = new System.Drawing.Point(67, 115);
+            this.DGVOwner.Name = "DGVOwner";
+            this.DGVOwner.RowTemplate.Height = 24;
+            this.DGVOwner.Size = new System.Drawing.Size(494, 164);
+            this.DGVOwner.TabIndex = 73;
+            this.DGVOwner.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVOwner_CellContentClick);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(143, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 74;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 702);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.Label5);
             this.Controls.Add(this.Label9);
             this.Controls.Add(this.txtTrackID);
@@ -432,7 +448,6 @@
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.Owners);
-            this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.DGVtracks);
             this.Controls.Add(this.TextBox2);
             this.Controls.Add(this.TextBox1);
@@ -441,9 +456,9 @@
             this.Controls.Add(this.DGVCD);
             this.Name = "Form1";
             this.Text = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -458,7 +473,6 @@
         internal System.Windows.Forms.Button btnaddTracks;
         internal System.Windows.Forms.Button btnAddCD;
         internal System.Windows.Forms.Button btnAddOwner;
-        internal System.Windows.Forms.DataGridView DGVOwner;
         internal System.Windows.Forms.DataGridView DGVtracks;
         internal System.Windows.Forms.TextBox TextBox1;
         internal System.Windows.Forms.ComboBox ComboBox1;
@@ -486,6 +500,8 @@
         internal System.Windows.Forms.TextBox txtTrackID;
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.Label Label5;
+        private System.Windows.Forms.DataGridView DGVOwner;
+        private System.Windows.Forms.Button button1;
         }
     }
 
