@@ -1,0 +1,284 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace C_Sharp_SQL_Movies_Database_2016 {
+    class Database {
+
+        private SqlConnection Connection = new SqlConnection();
+        private SqlCommand Command = new SqlCommand();
+
+        private SqlDataAdapter da = new SqlDataAdapter();
+        //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
+        public Database() {
+            //change the connection string to run from your own music db
+            string connectionString = @"Data Source=GARY-LAPTOP\sqlexpress;Initial Catalog=Music;Integrated Security=True";
+            Connection.ConnectionString = connectionString;
+            Command.Connection = Connection;
+            }
+
+        //Connection test for the Unit test to see if the connection is working.
+        public bool ConnectionTest() {
+            DataTable dt = new DataTable();
+            //create a datatable can't have it global as it holds all the data
+            try {
+                string SQL = "select * from Owner";
+                da = new SqlDataAdapter(SQL, Connection);
+                //'connect in to the DB and get the SQL
+                Connection.Open();
+                //open a connection to the DB
+                da.Fill(dt);
+                //fill the datatable from the SQL via the DataAdapter
+                Connection.Close();
+                return true;
+                //Working!
+                } catch {
+                Connection.Close();
+                return false;
+                //Not Working"
+                }
+
+            }
+
+        public object FillDGVOwnerWithOwner() {
+
+            //   Dim da As SqlDataAdapter ' create a dataadapter to pass the data
+            DataTable dt = new DataTable();
+            //create a datatable as we only have one table, the Owner
+
+            da = new SqlDataAdapter("select * from Owner ", Connection);
+            //connect in to the DB and get the SQL
+
+            Connection.Open();
+            //open a connection to the DB
+            da.Fill(dt);
+            //fill the datatable from the SQL 
+            Connection.Close();
+            //close the connection
+
+            return dt;
+            //pass the datatable data to the DataGridView
+
+            }
+
+
+        public object FillDGVCDWithOwnerClick(string Ownervalue) {
+            string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + Ownervalue + "' ";
+            da = new SqlDataAdapter(SQL, Connection);
+            //connect in to the DB and get the SQL
+            DataTable dt = new DataTable();
+            //create a datatable as we only have one table, the Owner
+
+            Connection.Open();
+            //open a connection to the DB
+            da.Fill(dt);
+            //fill the datatable from the SQL 
+            Connection.Close();
+            //close the connection
+
+            return dt;
+            }
+
+        public object FillDGVTracksWithCDClick(string value) {
+
+            DataTable dt = new DataTable();
+            //create a datatable
+            string SQL = "select Trackname, trackduration, trackID from CDTracks where CDIDFK = '" + value + "' ";
+
+            da = new SqlDataAdapter(SQL, Connection);
+            //'connect in to the DB and get the SQL
+
+            Connection.Open();
+            //open a connection to the DB
+            da.Fill(dt);
+            //fill the datatable from the SQL 
+            Connection.Close();
+            //close the connection
+
+            return dt;
+            }
+
+
+        public string DeleteOwnerCDTracks(string ID, string Table) {
+            //only run if there is something in the textbox
+
+            if (!object.ReferenceEquals(ID, string.Empty)) {
+                var myCommand = new SqlCommand();
+                switch (Table) {
+                    case "Owner":
+                        myCommand = new SqlCommand("DELETE FROM Owner WHERE OwnerID = @ID");
+                        break;
+                    case "CD":
+                        myCommand = new SqlCommand("DELETE FROM CD WHERE CDID = @ID");
+                        break;
+                    case "Track":
+                        myCommand = new SqlCommand("DELETE FROM CDTracks WHERE TrackID = @ID");
+                        break;
+                    }
+
+                myCommand.Connection = Connection;
+                myCommand.Parameters.AddWithValue("ID", ID);
+                //use parameters to prevent SQL injections
+
+                Connection.Open();
+                // open connection add in the SQL
+                myCommand.ExecuteNonQuery();
+                Connection.Close();
+                return "Success";
+                } else {
+                Connection.Close();
+                return "Failed";
+                }
+            }
+        public string AddOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
+            try {
+                //Added a Stored Procedure with Parameters 
+                var myCommand = new SqlCommand();
+                myCommand.Connection = Connection;
+                if (AddOrUpdate == "Add") {
+                    //   myCommand = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
+
+                    myCommand.CommandText = "proc_Add_Owner";
+                    myCommand.CommandType = CommandType.StoredProcedure;
+                    myCommand.Parameters.AddWithValue("Firstname", Firstname);
+                    myCommand.Parameters.AddWithValue("Lastname", Lastname);
+
+
+                    } else if (AddOrUpdate == "Update") {
+                    myCommand = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ");
+
+                    var _with1 = myCommand.Parameters;
+                    //use parameters to prevent SQL injections
+                    _with1.AddWithValue("Firstname", Firstname);
+                    _with1.AddWithValue("Lastname", Lastname);
+                    _with1.AddWithValue("ID", ID);
+                    }
+                Connection.Open();
+                // open connection add in the SQL
+                myCommand.ExecuteNonQuery();
+                Connection.Close();
+                return " is Successful";
+                } catch {
+                //need to get it to close a second time as it jumps the first connection.close when ExecuteNonQuery fails.
+                Connection.Close();
+                return " has Failed";
+                }
+            }
+
+        public string AddOrUpdateCD(string OwnerID, string Name, string Artist, string Genre, string CDID, string AddOrUpdate) {
+            try {
+                var myCommand = new SqlCommand();
+
+                if (AddOrUpdate == "Add") {
+                    myCommand = new SqlCommand("INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
+                    } else if (AddOrUpdate == "Update") {
+                    myCommand = new SqlCommand("UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
+                    }
+
+
+                myCommand.Connection = Connection;
+
+                var _with2 = myCommand.Parameters;
+                //use parameters to prevent SQL injections
+                _with2.AddWithValue("OwnerID", OwnerID);
+                _with2.AddWithValue("Name", Name);
+                _with2.AddWithValue("Artist", Artist);
+                _with2.AddWithValue("Genre", Genre);
+                _with2.AddWithValue("ID", CDID);
+
+                Connection.Open();
+                // open connection add in the SQL
+                myCommand.ExecuteNonQuery();
+                Connection.Close();
+
+                return " is Successful";
+                } catch {
+                Connection.Close();
+                return " has Failed";
+                }
+            }
+
+        public string AddOrUpdateCDTrack(string CDIDFK, string CDTrackID, string TrackName, string TrackDuration, string TrackID, string AddOrUpdate) {
+            try {
+                var myCommand = new SqlCommand();
+                if (AddOrUpdate == "Add") {
+                    myCommand = new SqlCommand("INSERT INTO CDTracks (CDIDFK, CDTrackID, TrackName, TrackDuration) " + "VALUES(@CDIDFK, @CDTrackID, @TrackName, @TrackDuration)");
+                    } else if (AddOrUpdate == "Update") {
+                    myCommand = new SqlCommand("UPDATE CDTracks set CDIDFK=@CDIDFK, CDTrackID=@CDTrackID, TrackName=@TrackName, TrackDuration=@TrackDuration  where TrackID =@TrackID  ");
+                    }
+
+                myCommand.Connection = Connection;
+
+                var _with3 = myCommand.Parameters;
+                //use parameters to prevent SQL injections
+                _with3.AddWithValue("CDIDFK", CDIDFK);
+                _with3.AddWithValue("CDTrackID", CDTrackID);
+                _with3.AddWithValue("TrackName", TrackName);
+                _with3.AddWithValue("TrackDuration", TrackDuration);
+                _with3.AddWithValue("TrackID", TrackID);
+
+                Connection.Open();
+                // open connection add in the SQL
+                myCommand.ExecuteNonQuery();
+                Connection.Close();
+
+                return " is Successful";
+                } catch {
+                Connection.Close();
+                return " has Failed";
+                }
+            }
+
+
+
+
+
+        public object FillListBoxWithGenre() {
+            DataTable dt = new DataTable();
+            //create a datatable can't have it global as it holds all the data
+
+            string SQL = "select genre from UniqueGenre";
+            da = new SqlDataAdapter(SQL, Connection);
+            //'connect in to the DB and get the SQL
+            Connection.Open();
+            //open a connection to the DB
+            da.Fill(dt);
+            //fill the datatable from the SQL via the DataAdapter
+            Connection.Close();
+
+            return dt;
+
+            }
+
+        public object FillComboBoxWithName() {
+            string SQL = "SELECT FirstName, LastName, OwnerID FROM Owner";
+            da = new SqlDataAdapter(SQL, Connection);
+            //'connect in to the DB and get the SQL
+            DataSet ds = new DataSet();
+
+            //fill the dataset
+            //This code shows how to bind a DataTable to a ComboBox and display column 1 of the DataTable (the "Description" column) in the ComboBox and use column 2 ("Code") to select ComboBox items. 
+
+            Connection.Open();
+            da.Fill(ds, "Owner");
+            Connection.Close();
+            //fill it with the owner table
+
+            return ds.Tables["Owner"];
+
+            }
+
+
+
+        }
+
+
+
+
+
+    }
+
