@@ -54,17 +54,17 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 //if you are clicking on a row and not outside it
                 if (e.RowIndex >= 0) {
                     //Fill the next CD DGV with the OwnerID
-                    DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(OwnerID);
+                    DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(OwnerID.ToString());
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     txtFN.Text = OwnerFN;
                     //show it in the text box at the bottom
                     txtLN.Text = OwnerLN;
-                    TxtOwnerID.Text = OwnerID;
+                    TxtOwnerID.Text = OwnerID.ToString();
                     //   Me.Text = OwnerID 'check to see that its working
                     }
 
                 } catch (Exception ex) {
-                Interaction.MsgBox(ex.Message());
+                MessageBox.Show(ex.Message);
                 }
             }
 
@@ -77,16 +77,16 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 (!object.ReferenceEquals(txtLN.Text, string.Empty))) {
                 try {
                     result = myDatabase.AddOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Add");
-                    Interaction.MsgBox(txtFN.Text + " " + txtLN.Text + " Updating " + result);
+                    MessageBox.Show(txtFN.Text + " " + txtLN.Text + " Updating " + result);
                     } catch (Exception ex) {
-                    Interaction.MsgBox(ex.Message());
+                    MessageBox.Show(ex.Message);
                     }
                 //update the datagrid view to see new entries
                 DisplayDataGridViewOwner();
                 txtFN.Text = "";
                 txtLN.Text = "";
                 } else {
-                Interaction.MsgBox("Fill all the fields");
+                MessageBox.Show("Fill all the fields");
                 }
             }
 
@@ -100,11 +100,11 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             string CDartist = null;
             //name, artist, genre cdid
             try {
-                CDID = DGVCD.Rows[e.RowIndex].Cells[3].Value;
+                CDID = DGVCD.Rows[e.RowIndex].Cells[3].Value.ToString();
                 //CDID
-                CDname = DGVCD.Rows[e.RowIndex].Cells[0].Value;
-                CDGenre = DGVCD.Rows[e.RowIndex].Cells[2].Value;
-                CDartist = DGVCD.Rows[e.RowIndex].Cells[1].Value;
+                CDname = DGVCD.Rows[e.RowIndex].Cells[0].Value.ToString();
+                CDGenre = DGVCD.Rows[e.RowIndex].Cells[2].Value.ToString();
+                CDartist = DGVCD.Rows[e.RowIndex].Cells[1].Value.ToString();
 
                 if (e.RowIndex >= 0) {
                     //  DisplayDataGridViewTracks(CDID)
@@ -117,7 +117,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     txtCDID.Text = CDID;
                     }
                 } catch (Exception ex) {
-                Interaction.MsgBox(ex.Message());
+                MessageBox.Show(ex.Message);
                 }
             }
 
@@ -130,10 +130,10 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             string CDTrackID = null;
 
             try {
-                Trackname = DGVtracks.Rows[e.RowIndex].Cells[0].Value;
-                trackduration = DGVtracks.Rows[e.RowIndex].Cells[1].Value;
-                trackID = DGVtracks.Rows[e.RowIndex].Cells[2].Value;
-                CDTrackID = DGVtracks.Rows[e.RowIndex].Cells[3].Value;
+                Trackname = DGVtracks.Rows[e.RowIndex].Cells[0].Value.ToString();
+                trackduration = DGVtracks.Rows[e.RowIndex].Cells[1].Value.ToString();
+                trackID = DGVtracks.Rows[e.RowIndex].Cells[2].Value.ToString();
+                CDTrackID = DGVtracks.Rows[e.RowIndex].Cells[3].Value.ToString();
                 txttrackname.Text = Trackname;
                 txtduration.Text = trackduration;
                 txtTrackID.Text = trackID;
@@ -165,7 +165,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             //hold the ID of the owner, CD, or Track
             string result = null;
             Button fakebutton = null;
-            fakebutton = sender;
+            fakebutton = (Button)sender;
             try {
                 switch (fakebutton.Name) {
                     case "btnDeleteOwner":
@@ -198,12 +198,12 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                         break;
                     }
                 //delete the track here and return back success or failure
-                result = myDatabase.DeleteOwnerCDTracks(InputID, fakebutton.Tag);
-                Interaction.MsgBox(fakebutton.Tag + " delete " + result);
+                result = myDatabase.DeleteOwnerCDTracks(InputID, fakebutton.Tag.ToString());
+                MessageBox.Show(fakebutton.Tag + " delete " + result);
                 //clear all the textboxes afterwards
                 ClearAllTextBoxes(this);
                 } catch (Exception ex) {
-                Interaction.MsgBox("First click on the Owner, CD, or Track you want to delete " + ex.Message());
+                MessageBox.Show("First click on the Owner, CD, or Track you want to delete " + ex.Message);
                 }
             }
 
@@ -219,16 +219,16 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text,
                         txtCDGenre.Text, txtCDID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
-                    Interaction.MsgBox(txtCDName.Text + " Adding " + result);
+                    MessageBox.Show(txtCDName.Text + " Adding " + result);
                     DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(TxtOwnerID.Text);
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     } catch (Exception ex) {
-                    Interaction.MsgBox(ex.Message());
+                    MessageBox.Show(ex.Message);
                     }
 
                 } else {
-                Interaction.MsgBox("Fill all the fields");
+                MessageBox.Show("Fill all the fields");
                 }
             }
 
@@ -244,16 +244,16 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     result = myDatabase.AddOrUpdateCDTrack(txtCDID.Text, txtCDtrackID.Text, txttrackname.Text,
                         txtduration.Text, txtTrackID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
-                    Interaction.MsgBox(txttrackname.Text + " Adding " + result);
+                    MessageBox.Show(txttrackname.Text + " Adding " + result);
                     DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     } catch (Exception ex) {
-                    Interaction.MsgBox(ex.Message());
+                    MessageBox.Show(ex.Message);
                     }
 
                 } else {
-                Interaction.MsgBox("Fill all the fields");
+                MessageBox.Show("Fill all the fields");
                 }
             }
 
@@ -269,12 +269,12 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 string result = null;
                 try {
                     result = myDatabase.AddOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Update");
-                    Interaction.MsgBox(txtFN.Text + " " + txtLN.Text + " Updating " + result);
+                    MessageBox.Show(txtFN.Text + " " + txtLN.Text + " Updating " + result);
                     //update the datagrid view to see new entries 
                     DisplayDataGridViewOwner();
                     DGVOwner.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     } catch (Exception ex) {
-                    Interaction.MsgBox("Owner not Updated" + ex.Message());
+                    MessageBox.Show("Owner not Updated" + ex.Message);
                     }
 
                 } else {
@@ -292,12 +292,12 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text,
                         txtCDGenre.Text, txtCDID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
-                    Interaction.MsgBox(txtCDName.Text + " Updating " + result);
+                    MessageBox.Show(txtCDName.Text + " Updating " + result);
                     DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(TxtOwnerID.Text);
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     } catch (Exception ex) {
-                    Interaction.MsgBox("CD not Updated" + ex.Message());
+                    MessageBox.Show("CD not Updated" + ex.Message);
                     }
 
                 } else {
@@ -315,12 +315,12 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     result = myDatabase.AddOrUpdateCDTrack(txtCDID.Text, txtCDtrackID.Text, txttrackname.Text,
                         txtduration.Text, txtTrackID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
-                    Interaction.MsgBox(txttrackname.Text + " Updating " + result);
+                    MessageBox.Show(txttrackname.Text + " Updating " + result);
                     DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     } catch (Exception ex) {
-                    Interaction.MsgBox("Track not Updated" + ex.Message());
+                    MessageBox.Show("Track not Updated" + ex.Message);
                     }
 
                 } else {
@@ -334,7 +334,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
         #region "Stuff not important"
 
         private void lbgenre_SelectedIndexChanged(System.Object sender, System.EventArgs e) {
-            TextBox2.Text = lbgenre.SelectedIndex;
+            TextBox2.Text = lbgenre.SelectedIndex.ToString();
             }
 
         private void DisplayListBox() {
@@ -346,7 +346,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 lbgenre.DisplayMember = "Genre";
 
                 } catch (Exception ex) {
-                Interaction.MsgBox(ex.Message());
+                MessageBox.Show(ex.Message);
                 }
             }
 
@@ -365,7 +365,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
         private void ComboBox1_SelectedIndexChanged(System.Object sender, System.EventArgs e) {
             //pass the number to the textbox
-            TextBox1.Text = ComboBox1.SelectedIndex + 1;
+            TextBox1.Text = (ComboBox1.SelectedIndex + 1).ToString();
             if (ComboBox1.SelectedIndex != -1) {
                 // FillWithOwnerCD()
                 }
@@ -385,4 +385,4 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
         }
     }
-}
+
