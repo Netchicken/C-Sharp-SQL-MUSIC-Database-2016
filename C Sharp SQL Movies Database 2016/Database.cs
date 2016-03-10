@@ -87,7 +87,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             DataTable dt = new DataTable();
             //create a datatable
-            string SQL = "select Trackname, trackduration, trackID from CDTracks where CDIDFK = '" + value + "' ";
+            string SQL = "select TrackName, TrackDuration, trackID from CDTracks where CDIDFK = '" + value + "' ";
 
             da = new SqlDataAdapter(SQL, Connection);
             //'connect in to the DB and get the SQL
@@ -180,23 +180,25 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     }
 
 
-                myCommand.Connection = Connection;
+                using (myCommand.Connection = Connection)
+                {
 
-                var _with2 = myCommand.Parameters;
-                //use parameters to prevent SQL injections
-                _with2.AddWithValue("OwnerID", OwnerID);
-                _with2.AddWithValue("Name", Name);
-                _with2.AddWithValue("Artist", Artist);
-                _with2.AddWithValue("Genre", Genre);
-                _with2.AddWithValue("ID", CDID);
+                    var _with2 = myCommand.Parameters;
+                    //use parameters to prevent SQL injections
+                    _with2.AddWithValue("OwnerID", OwnerID);
+                    _with2.AddWithValue("Name", Name);
+                    _with2.AddWithValue("Artist", Artist);
+                    _with2.AddWithValue("Genre", Genre);
+                    _with2.AddWithValue("ID", CDID);
 
-                Connection.Open();
-                // open connection add in the SQL
-                myCommand.ExecuteNonQuery();
-                Connection.Close();
-
-                return " is Successful";
-                } catch {
+                    Connection.Open();
+                    // open connection add in the SQL
+                    myCommand.ExecuteNonQuery();
+                    Connection.Close();
+                    Connection.Dispose();
+                    return " is Successful";
+                }
+            } catch {
                 Connection.Close();
                 return " has Failed";
                 }

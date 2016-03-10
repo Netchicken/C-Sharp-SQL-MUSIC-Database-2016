@@ -12,12 +12,13 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
     public partial class Form1 : Form {
         //create an instance of the Database class
         Database myDatabase = new Database();
-
-        private void Form1_Load(object sender, System.EventArgs e) {
+        
+        public Form1() {
+            InitializeComponent();
             loadDB();
-            }
-
-        public void loadDB() {
+        }
+        
+    public void loadDB() {
             //just to show the listbox with the genres in it
             DisplayListBox();
             //load the owner dgv
