@@ -7,27 +7,49 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace C_Sharp_SQL_Movies_Database_2016 {
-    class Database {
-
+    class Database
+    {
+        //Create Connection and Command,and an Adapter.
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand();
-
         private SqlDataAdapter da = new SqlDataAdapter();
         //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
-        public Database() {
+        public Database()
+        {
             //change the connection string to run from your own music db
-            string connectionString = @"Data Source=GARY-LAPTOP\sqlexpress;Initial Catalog=Music;Integrated Security=True";
+            string connectionString =
+                @"Data Source=GARY-LAPTOP\sqlexpress;Initial Catalog=Music;Integrated Security=True";
             Connection.ConnectionString = connectionString;
             Command.Connection = Connection;
-            }
+        }
 
-        //Connection test for the Unit test to see if the connection is working.
+        public DataTable FillDGVOwnerWithOwner()
+        {
+
+            //   Load the OWner DataGridView
+            DataTable dt = new DataTable();
+            //create a datatable as we only have one table, the Owner
+
+            using (da = new SqlDataAdapter("select * from Owner ", Connection))
+            {
+                //connect in to the DB and get the SQL
+                Connection.Open();
+                //open a connection to the DB
+                da.Fill(dt);
+                //fill the datatable from the SQL 
+                Connection.Close(); //close the connection
+            }
+            return dt; //pass the datatable data to the DataGridView
+        }
+    
+
+    //Connection test for the Unit test to see if the connection is working.
         public bool ConnectionTest() {
             DataTable dt = new DataTable();
             //create a datatable can't have it global as it holds all the data
             try {
                 string SQL = "select * from Owner";
-                da = new SqlDataAdapter(SQL, Connection);
+                using (da = new SqlDataAdapter(SQL, Connection)) ;
                 //'connect in to the DB and get the SQL
                 Connection.Open();
                 //open a connection to the DB
@@ -44,26 +66,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             }
 
-        public object FillDGVOwnerWithOwner() {
-
-            //   Dim da As SqlDataAdapter ' create a dataadapter to pass the data
-            DataTable dt = new DataTable();
-            //create a datatable as we only have one table, the Owner
-
-            da = new SqlDataAdapter("select * from Owner ", Connection);
-            //connect in to the DB and get the SQL
-
-            Connection.Open();
-            //open a connection to the DB
-            da.Fill(dt);
-            //fill the datatable from the SQL 
-            Connection.Close();
-            //close the connection
-
-            return dt;
-            //pass the datatable data to the DataGridView
-
-            }
+ 
 
 
         public object FillDGVCDWithOwnerClick(string Ownervalue) {
@@ -244,14 +247,15 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             //create a datatable can't have it global as it holds all the data
 
             string SQL = "select genre from UniqueGenre";
-            da = new SqlDataAdapter(SQL, Connection);
-            //'connect in to the DB and get the SQL
-            Connection.Open();
-            //open a connection to the DB
-            da.Fill(dt);
-            //fill the datatable from the SQL via the DataAdapter
-            Connection.Close();
+            using ( da = new SqlDataAdapter(SQL, Connection)) {
+               //'connect in to the DB and get the SQL
+                Connection.Open();
+                //open a connection to the DB
+                da.Fill(dt);
+                //fill the datatable from the SQL via the DataAdapter
+                Connection.Close();
 
+                }
             return dt;
 
             }
