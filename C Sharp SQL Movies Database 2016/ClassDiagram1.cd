@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="C_Sharp_SQL_Movies_Database_2016.Database">
+    <Position X="7.5" Y="0.75" Width="2.25" />
+    <Members>
+      <Method Name="AddOrUpdateCD" Hidden="true" />
+      <Method Name="AddOrUpdateCDTrack" Hidden="true" />
+      <Method Name="AddOrUpdateOwner" Hidden="true" />
+      <Field Name="Command" Hidden="true" />
+      <Field Name="Connection" Hidden="true" />
+      <Method Name="ConnectionUNITTest" Hidden="true" />
+      <Field Name="da" Hidden="true" />
+      <Method Name="Database" Hidden="true" />
+      <Method Name="DeleteOwnerCDTracks" Hidden="true" />
+      <Method Name="FillComboBoxWithName" Hidden="true" />
+      <Method Name="FillListBoxWithGenre" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAAAABEEAICgEBIQAAAAAAAAAAAAAAAgABAA=</HashCode>
+      <FileName>Database.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="C_Sharp_SQL_Movies_Database_2016.Form1">
+    <Position X="4.5" Y="0.75" Width="2.75" />
+    <Members>
+      <Field Name="btnAddCD" Hidden="true" />
+      <Method Name="btnAddCD_Click" Hidden="true" />
+      <Field Name="btnAddOwner" Hidden="true" />
+      <Method Name="btnAddOwner_Click" Hidden="true" />
+      <Field Name="btnaddTracks" Hidden="true" />
+      <Method Name="btnaddTracks_Click" Hidden="true" />
+      <Field Name="BtnClear" Hidden="true" />
+      <Method Name="BtnClear_Click" Hidden="true" />
+      <Method Name="btnDelete_Click" Hidden="true" />
+      <Field Name="btnDeleteCD" Hidden="true" />
+      <Field Name="btnDeleteOwner" Hidden="true" />
+      <Field Name="btnDeleteTracks" Hidden="true" />
+      <Field Name="btnUpdate" Hidden="true" />
+      <Method Name="btnUpdate_Click" Hidden="true" />
+      <Field Name="button1" Hidden="true" />
+      <Method Name="ClearAllTextBoxes" Hidden="true" />
+      <Field Name="ComboBox1" Hidden="true" />
+      <Method Name="ComboBox1_SelectedIndexChanged" Hidden="true" />
+      <Method Name="comboboxfill" Hidden="true" />
+      <Field Name="components" Hidden="true" />
+      <Field Name="DGVCD" Hidden="true" />
+      <Field Name="DGVOwner" Hidden="true" />
+      <Field Name="DGVtracks" Hidden="true" />
+      <Method Name="DisplayListBox" Hidden="true" />
+      <Method Name="Dispose" Hidden="true" />
+      <Method Name="Form1" Hidden="true" />
+      <Method Name="InitializeComponent" Hidden="true" />
+      <Field Name="Label1" Hidden="true" />
+      <Field Name="Label2" Hidden="true" />
+      <Field Name="Label3" Hidden="true" />
+      <Field Name="Label4" Hidden="true" />
+      <Field Name="Label5" Hidden="true" />
+      <Field Name="Label6" Hidden="true" />
+      <Field Name="Label7" Hidden="true" />
+      <Field Name="Label8" Hidden="true" />
+      <Field Name="Label9" Hidden="true" />
+      <Field Name="lbgenre" Hidden="true" />
+      <Method Name="lbgenre_SelectedIndexChanged" Hidden="true" />
+      <Method Name="loadDB" Hidden="true" />
+      <Field Name="myDatabase" Hidden="true" />
+      <Field Name="Owners" Hidden="true" />
+      <Field Name="TextBox1" Hidden="true" />
+      <Method Name="TextBox1_TextChanged" Hidden="true" />
+      <Field Name="TextBox2" Hidden="true" />
+      <Field Name="txtCDArtist" Hidden="true" />
+      <Field Name="txtCDGenre" Hidden="true" />
+      <Field Name="txtCDID" Hidden="true" />
+      <Field Name="txtCDName" Hidden="true" />
+      <Field Name="txtCDtrackID" Hidden="true" />
+      <Field Name="txtduration" Hidden="true" />
+      <Field Name="txtFN" Hidden="true" />
+      <Field Name="txtLN" Hidden="true" />
+      <Field Name="TxtOwnerID" Hidden="true" />
+      <Field Name="txtTrackID" Hidden="true" />
+      <Field Name="txttrackname" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AFCFECKgHCgAJCgQAACBEEELiAgYQIAgIADQEoAACQA=</HashCode>
+      <FileName>Form1.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -194,6 +194,7 @@
             this.BtnClear.TabIndex = 61;
             this.BtnClear.Text = "Clear All";
             this.BtnClear.UseVisualStyleBackColor = true;
+            this.BtnClear.Click += new System.EventHandler(this.BtnClear_Click);
             // 
             // btnUpdate
             // 
@@ -204,6 +205,7 @@
             this.btnUpdate.TabIndex = 60;
             this.btnUpdate.Text = "Update All";
             this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // txtCDtrackID
             // 
@@ -238,6 +240,7 @@
             this.btnaddTracks.TabIndex = 56;
             this.btnaddTracks.Text = "Add Tracks";
             this.btnaddTracks.UseVisualStyleBackColor = true;
+            this.btnaddTracks.Click += new System.EventHandler(this.btnaddTracks_Click);
             // 
             // txtCDGenre
             // 
@@ -274,6 +277,7 @@
             this.btnAddCD.TabIndex = 51;
             this.btnAddCD.Text = "Add CD";
             this.btnAddCD.UseVisualStyleBackColor = true;
+            this.btnAddCD.Click += new System.EventHandler(this.btnAddCD_Click);
             // 
             // txtLN
             // 
@@ -300,6 +304,7 @@
             this.btnAddOwner.TabIndex = 47;
             this.btnAddOwner.Text = "Add Owner";
             this.btnAddOwner.UseVisualStyleBackColor = true;
+            this.btnAddOwner.Click += new System.EventHandler(this.btnAddOwner_Click);
             // 
             // Label2
             // 
@@ -410,7 +415,6 @@
             this.button1.TabIndex = 74;
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Form1
             // 

@@ -7,90 +7,58 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace C_Sharp_SQL_Movies_Database_2016 {
-    class Database
-    {
+    class Database {
         //Create Connection and Command,and an Adapter.
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand();
         private SqlDataAdapter da = new SqlDataAdapter();
         //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
-        public Database()
-        {
+        public Database() {
             //change the connection string to run from your own music db
             string connectionString =
                 @"Data Source=GARY-LAPTOP\sqlexpress;Initial Catalog=Music;Integrated Security=True";
             Connection.ConnectionString = connectionString;
             Command.Connection = Connection;
-        }
-
-        public DataTable FillDGVOwnerWithOwner()
-        {
+            }
+        public DataTable FillDGVOwnerWithOwner() {
 
             //   Load the OWner DataGridView
             DataTable dt = new DataTable();
             //create a datatable as we only have one table, the Owner
 
-            using (da = new SqlDataAdapter("select * from Owner ", Connection))
-            {
+            using (da = new SqlDataAdapter("select * from Owner ", Connection)) {
                 //connect in to the DB and get the SQL
                 Connection.Open();
                 //open a connection to the DB
                 da.Fill(dt);
                 //fill the datatable from the SQL 
                 Connection.Close(); //close the connection
-            }
+                }
             return dt; //pass the datatable data to the DataGridView
-        }
-    
+            }
+        public DataTable FillDGVCDWithOwnerClick(string OwnerID) {
+            string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + OwnerID + "' ";
+            using (da = new SqlDataAdapter(SQL, Connection)) {
+               
+                //connect in to the DB and get the SQL
+                DataTable dt = new DataTable();
+                //create a datatable as we only have one table, the Owner
 
-    //Connection test for the Unit test to see if the connection is working.
-        public bool ConnectionTest() {
-            DataTable dt = new DataTable();
-            //create a datatable can't have it global as it holds all the data
-            try {
-                string SQL = "select * from Owner";
-                using (da = new SqlDataAdapter(SQL, Connection)) ;
-                //'connect in to the DB and get the SQL
                 Connection.Open();
                 //open a connection to the DB
                 da.Fill(dt);
-                //fill the datatable from the SQL via the DataAdapter
+                //fill the datatable from the SQL 
                 Connection.Close();
-                return true;
-                //Working!
-                } catch {
-                Connection.Close();
-                return false;
-                //Not Working"
+                //close the connection
+
+                return dt; 
                 }
-
             }
-
- 
-
-
-        public object FillDGVCDWithOwnerClick(string Ownervalue) {
-            string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + Ownervalue + "' ";
-            da = new SqlDataAdapter(SQL, Connection);
-            //connect in to the DB and get the SQL
-            DataTable dt = new DataTable();
-            //create a datatable as we only have one table, the Owner
-
-            Connection.Open();
-            //open a connection to the DB
-            da.Fill(dt);
-            //fill the datatable from the SQL 
-            Connection.Close();
-            //close the connection
-
-            return dt;
-            }
-
-        public object FillDGVTracksWithCDClick(string value) {
+        public DataTable FillDGVTracksWithCDClick(string CDID) {
 
             DataTable dt = new DataTable();
             //create a datatable
-            string SQL = "select TrackName, TrackDuration, trackID from CDTracks where CDIDFK = '" + value + "' ";
+            string SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + CDID + "' ";
 
             da = new SqlDataAdapter(SQL, Connection);
             //'connect in to the DB and get the SQL
@@ -104,8 +72,6 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             return dt;
             }
-
-
         public string DeleteOwnerCDTracks(string ID, string Table) {
             //only run if there is something in the textbox
 
@@ -137,7 +103,29 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 return "Failed";
                 }
             }
-        public string AddOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
+          //Connection test for the Unit test to see if the connection is working.
+        public bool ConnectionUNITTest() {
+            DataTable dt = new DataTable();
+            //create a datatable can't have it global as it holds all the data
+            try {
+                string SQL = "select * from Owner";
+                using (da = new SqlDataAdapter(SQL, Connection)) ;
+                //'connect in to the DB and get the SQL
+                Connection.Open();
+                //open a connection to the DB
+                da.Fill(dt);
+                //fill the datatable from the SQL via the DataAdapter
+                Connection.Close();
+                return true;
+                //Working!
+                } catch {
+                Connection.Close();
+                return false;
+                //Not Working"
+                }
+
+            }
+      public string AddOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
             try {
                 //Added a Stored Procedure with Parameters 
                 var myCommand = new SqlCommand();
@@ -183,8 +171,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     }
 
 
-                using (myCommand.Connection = Connection)
-                {
+                using (myCommand.Connection = Connection) {
 
                     var _with2 = myCommand.Parameters;
                     //use parameters to prevent SQL injections
@@ -200,8 +187,8 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     Connection.Close();
                     Connection.Dispose();
                     return " is Successful";
-                }
-            } catch {
+                    }
+                } catch {
                 Connection.Close();
                 return " has Failed";
                 }
@@ -242,13 +229,13 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
 
 
-        public object FillListBoxWithGenre() {
+        public DataTable FillListBoxWithGenre() {
             DataTable dt = new DataTable();
             //create a datatable can't have it global as it holds all the data
 
             string SQL = "select genre from UniqueGenre";
-            using ( da = new SqlDataAdapter(SQL, Connection)) {
-               //'connect in to the DB and get the SQL
+            using (da = new SqlDataAdapter(SQL, Connection)) {
+                //'connect in to the DB and get the SQL
                 Connection.Open();
                 //open a connection to the DB
                 da.Fill(dt);
@@ -260,7 +247,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             }
 
-        public object FillComboBoxWithName() {
+        public DataTable FillComboBoxWithName() {
             string SQL = "SELECT FirstName, LastName, OwnerID FROM Owner";
             da = new SqlDataAdapter(SQL, Connection);
             //'connect in to the DB and get the SQL
