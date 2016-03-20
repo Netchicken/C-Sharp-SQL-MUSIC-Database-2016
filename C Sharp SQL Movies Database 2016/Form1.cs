@@ -70,7 +70,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             //only run if there is something in the textboxes
             if ((txtFN.Text != string.Empty) && (txtLN.Text != string.Empty)) {
                 try {
-                    result = myDatabase.AddOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Add");
+                    result = myDatabase.InsertOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Add");
                     MessageBox.Show(txtFN.Text + " " + txtLN.Text + " Updating " + result);
                     } catch (Exception ex) {
                     MessageBox.Show(ex.Message);
@@ -80,7 +80,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 txtFN.Text = "";
                 txtLN.Text = "";
                 } else {
-                MessageBox.Show("Fill all the fields");
+                MessageBox.Show("Fill First Name and Surname fields");
                 }
             }
 
@@ -258,7 +258,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 !object.ReferenceEquals(TxtOwnerID.Text, string.Empty)) {
                 string result = null;
                 try {
-                    result = myDatabase.AddOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Update");
+                    result = myDatabase.InsertOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Update");
                     MessageBox.Show(txtFN.Text + " " + txtLN.Text + " Updating " + result);
                     //update the datagrid view to see new entries 
                     DisplayDataGridViewOwner();

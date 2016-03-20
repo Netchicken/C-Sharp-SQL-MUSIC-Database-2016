@@ -125,32 +125,32 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 }
 
             }
-      public string AddOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
+      public string InsertOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
             try {
                 //Added a Stored Procedure with Parameters 
-                var myCommand = new SqlCommand();
-                myCommand.Connection = Connection;
+              //  var myCommand = new SqlCommand();
+             //   myCommand.Connection = Connection;
                 if (AddOrUpdate == "Add") {
-                    //   myCommand = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
+                       //Command = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
 
-                    myCommand.CommandText = "proc_Add_Owner";
-                    myCommand.CommandType = CommandType.StoredProcedure;
-                    myCommand.Parameters.AddWithValue("Firstname", Firstname);
-                    myCommand.Parameters.AddWithValue("Lastname", Lastname);
+                    Command.CommandText = "proc_Add_Owner";
+                    Command.CommandType = CommandType.StoredProcedure;
+                    Command.Parameters.AddWithValue("Firstname", Firstname);
+                    Command.Parameters.AddWithValue("Lastname", Lastname);
 
 
                     } else if (AddOrUpdate == "Update") {
-                    myCommand = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ");
+                    Command = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ");
 
-                    var _with1 = myCommand.Parameters;
+                    var _with = Command.Parameters;
                     //use parameters to prevent SQL injections
-                    _with1.AddWithValue("Firstname", Firstname);
-                    _with1.AddWithValue("Lastname", Lastname);
-                    _with1.AddWithValue("ID", ID);
+                    _with.AddWithValue("Firstname", Firstname);
+                    _with.AddWithValue("Lastname", Lastname);
+                    _with.AddWithValue("ID", ID);
                     }
                 Connection.Open();
                 // open connection add in the SQL
-                myCommand.ExecuteNonQuery();
+                Command.ExecuteNonQuery();
                 Connection.Close();
                 return " is Successful";
                 } catch {

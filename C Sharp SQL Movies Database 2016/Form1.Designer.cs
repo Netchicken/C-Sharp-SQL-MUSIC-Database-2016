@@ -162,6 +162,7 @@
             this.btnDeleteTracks.Tag = "Track";
             this.btnDeleteTracks.Text = "Delete Track";
             this.btnDeleteTracks.UseVisualStyleBackColor = true;
+            this.btnDeleteTracks.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnDeleteCD
             // 
@@ -173,6 +174,7 @@
             this.btnDeleteCD.Tag = "CD";
             this.btnDeleteCD.Text = "Delete CD";
             this.btnDeleteCD.UseVisualStyleBackColor = true;
+            this.btnDeleteCD.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnDeleteOwner
             // 
@@ -184,6 +186,7 @@
             this.btnDeleteOwner.Tag = "Owner";
             this.btnDeleteOwner.Text = "Delete Owner";
             this.btnDeleteOwner.UseVisualStyleBackColor = true;
+            this.btnDeleteOwner.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // BtnClear
             // 
