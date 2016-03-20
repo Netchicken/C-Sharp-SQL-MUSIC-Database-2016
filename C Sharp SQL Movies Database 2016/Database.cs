@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace C_Sharp_SQL_Movies_Database_2016 {
     class Database {
-        //Create Connection and Command,and an Adapter.
+        //Create Connection and Command,and an Adapter...
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand();
         private SqlDataAdapter da = new SqlDataAdapter();
@@ -39,7 +39,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
         public DataTable FillDGVCDWithOwnerClick(string OwnerID) {
             string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + OwnerID + "' ";
             using (da = new SqlDataAdapter(SQL, Connection)) {
-               
+
                 //connect in to the DB and get the SQL
                 DataTable dt = new DataTable();
                 //create a datatable as we only have one table, the Owner
@@ -51,7 +51,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 Connection.Close();
                 //close the connection
 
-                return dt; 
+                return dt;
                 }
             }
         public DataTable FillDGVTracksWithCDClick(string CDID) {
@@ -103,7 +103,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 return "Failed";
                 }
             }
-          //Connection test for the Unit test to see if the connection is working.
+        //Connection test for the Unit test to see if the connection is working.
         public bool ConnectionUNITTest() {
             DataTable dt = new DataTable();
             //create a datatable can't have it global as it holds all the data
@@ -125,13 +125,13 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 }
 
             }
-      public string InsertOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
+        public string InsertOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
             try {
                 //Added a Stored Procedure with Parameters 
-              //  var myCommand = new SqlCommand();
-             //   myCommand.Connection = Connection;
+                //  var myCommand = new SqlCommand();
+                //   myCommand.Connection = Connection;
                 if (AddOrUpdate == "Add") {
-                       //Command = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
+                    //Command = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
 
                     Command.CommandText = "proc_Add_Owner";
                     Command.CommandType = CommandType.StoredProcedure;
@@ -205,13 +205,13 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
                 myCommand.Connection = Connection;
 
-                var _with3 = myCommand.Parameters;
+                var myParams = myCommand.Parameters;
                 //use parameters to prevent SQL injections
-                _with3.AddWithValue("CDIDFK", CDIDFK);
-                _with3.AddWithValue("CDTrackID", CDTrackID);
-                _with3.AddWithValue("TrackName", TrackName);
-                _with3.AddWithValue("TrackDuration", TrackDuration);
-                _with3.AddWithValue("TrackID", TrackID);
+                myParams.AddWithValue("CDIDFK", CDIDFK);
+                myParams.AddWithValue("CDTrackID", CDTrackID);
+                myParams.AddWithValue("TrackName", TrackName);
+                myParams.AddWithValue("TrackDuration", TrackDuration);
+                myParams.AddWithValue("TrackID", TrackID);
 
                 Connection.Open();
                 // open connection add in the SQL
