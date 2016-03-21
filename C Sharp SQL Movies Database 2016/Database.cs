@@ -12,6 +12,9 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand();
         private SqlDataAdapter da = new SqlDataAdapter();
+
+
+
         //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
         public Database() {
             //change the connection string to run from your own music db
@@ -142,11 +145,11 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                     } else if (AddOrUpdate == "Update") {
                     Command = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ");
 
-                    var _with = Command.Parameters;
+                    var myParam = Command.Parameters;
                     //use parameters to prevent SQL injections
-                    _with.AddWithValue("Firstname", Firstname);
-                    _with.AddWithValue("Lastname", Lastname);
-                    _with.AddWithValue("ID", ID);
+                    myParam.AddWithValue("Firstname", Firstname);
+                    myParam.AddWithValue("Lastname", Lastname);
+                    myParam.AddWithValue("ID", ID);
                     }
                 Connection.Open();
                 // open connection add in the SQL
@@ -161,25 +164,29 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
 
         public string AddOrUpdateCD(string OwnerID, string Name, string Artist, string Genre, string CDID, string AddOrUpdate) {
-            try {
-                var myCommand = new SqlCommand();
+            Dictionary<string, string> SQLDict = new Dictionary<string, string>();
+            SQLDict.Add("Add", "INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
+            SQLDict.Add("Update", "UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
 
-                if (AddOrUpdate == "Add") {
-                    myCommand = new SqlCommand("INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
-                    } else if (AddOrUpdate == "Update") {
-                    myCommand = new SqlCommand("UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
-                    }
+            try {
+                var myCommand = new SqlCommand(SQLDict[AddOrUpdate]);
+
+                //if (AddOrUpdate == "Add") {
+                //    myCommand = new SqlCommand("INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
+                //    } else if (AddOrUpdate == "Update") {
+                //    myCommand = new SqlCommand("UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
+                //    }
 
 
                 using (myCommand.Connection = Connection) {
 
-                    var _with2 = myCommand.Parameters;
+                    var myParams = myCommand.Parameters;
                     //use parameters to prevent SQL injections
-                    _with2.AddWithValue("OwnerID", OwnerID);
-                    _with2.AddWithValue("Name", Name);
-                    _with2.AddWithValue("Artist", Artist);
-                    _with2.AddWithValue("Genre", Genre);
-                    _with2.AddWithValue("ID", CDID);
+                    myParams.AddWithValue("OwnerID", OwnerID);
+                    myParams.AddWithValue("Name", Name);
+                    myParams.AddWithValue("Artist", Artist);
+                    myParams.AddWithValue("Genre", Genre);
+                    myParams.AddWithValue("ID", CDID);
 
                     Connection.Open();
                     // open connection add in the SQL
