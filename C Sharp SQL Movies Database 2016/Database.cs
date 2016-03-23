@@ -170,9 +170,9 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             SQLDict.Add("Add", "INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
 
             SQLDict.Add("Update", "UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
-
+            var myCommand = new SqlCommand(SQLDict[AddOrUpdate], Connection);
             try {
-                var myCommand = new SqlCommand(SQLDict[AddOrUpdate], Connection);
+
 
                 //if (AddOrUpdate == "Add") {
                 //    myCommand = new SqlCommand("INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
@@ -191,7 +191,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 // open connection add in the SQL
                 myCommand.ExecuteNonQuery();
                 Connection.Close();
-                Connection.Dispose();
+               
                 return " is Successful";
 
                 } catch (Exception e) {
