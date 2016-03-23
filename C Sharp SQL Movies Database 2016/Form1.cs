@@ -378,11 +378,19 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             }
 
-        private void txtGoogle_Click(object sender, EventArgs e) {
-            FrmDetails frm = new FrmDetails(this);
-            frm.Show();
-          //  frm.CDName = txtCDName.Text;
+        private void txtGoogle_Click(object sender, EventArgs e)
+        {
+            if (txtCDName.Text == "")
+            {
+                MessageBox.Show("Click on a CD first Dimwit");
+            }
+            else
+            {
+                FrmDetails frm = new FrmDetails(this);
+                frm.Show();
+                
             }
         }
+    }
     }
 

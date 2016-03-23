@@ -13,16 +13,17 @@ using System.Windows.Forms;
 namespace C_Sharp_SQL_Movies_Database_2016 {
     public partial class FrmDetails : Form
     {
+        //http://stackoverflow.com/questions/7886544/passing-a-value-from-one-form-to-another-form
         private Form1 frm1 = null;
         public string CDName;
         private string address; 
         public FrmDetails(Form1 frm1) {
             InitializeComponent();
             CDName = frm1.txtCDName.Text;
-
-            address = "https://www.google.com/#q=" + CDName + "&tbm=vid";
-            webBrowser1.Navigate(new Uri(address));
            
+                address = "https://www.google.com/#q=" + CDName + "&tbm=vid";
+                webBrowser1.Navigate(new Uri(address));
+            
         }
         private void Navigate(String address) {
             if (String.IsNullOrEmpty(address)) return;
@@ -33,6 +34,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 }
             try {
                 webBrowser1.Navigate(new Uri(address));
+                this.Text = webBrowser1.Url.ToString();  //show url
                 } catch (System.UriFormatException) {
                 return;
                 }

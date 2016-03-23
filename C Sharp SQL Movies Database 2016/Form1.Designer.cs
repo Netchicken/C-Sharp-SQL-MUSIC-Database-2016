@@ -59,7 +59,6 @@
             this.lbgenre = new System.Windows.Forms.ListBox();
             this.DGVCD = new System.Windows.Forms.DataGridView();
             this.DGVOwner = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
             this.txtGoogle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).BeginInit();
@@ -69,7 +68,7 @@
             // Label5
             // 
             this.Label5.AutoSize = true;
-            this.Label5.Location = new System.Drawing.Point(983, 480);
+            this.Label5.Location = new System.Drawing.Point(969, 398);
             this.Label5.Name = "Label5";
             this.Label5.Size = new System.Drawing.Size(62, 17);
             this.Label5.TabIndex = 68;
@@ -78,7 +77,7 @@
             // Label9
             // 
             this.Label9.AutoSize = true;
-            this.Label9.Location = new System.Drawing.Point(131, 518);
+            this.Label9.Location = new System.Drawing.Point(117, 436);
             this.Label9.Name = "Label9";
             this.Label9.Size = new System.Drawing.Size(68, 17);
             this.Label9.TabIndex = 72;
@@ -86,7 +85,7 @@
             // 
             // txtTrackID
             // 
-            this.txtTrackID.Location = new System.Drawing.Point(986, 568);
+            this.txtTrackID.Location = new System.Drawing.Point(972, 486);
             this.txtTrackID.Margin = new System.Windows.Forms.Padding(4);
             this.txtTrackID.Name = "txtTrackID";
             this.txtTrackID.Size = new System.Drawing.Size(55, 22);
@@ -95,7 +94,7 @@
             // Label8
             // 
             this.Label8.AutoSize = true;
-            this.Label8.Location = new System.Drawing.Point(424, 515);
+            this.Label8.Location = new System.Drawing.Point(410, 433);
             this.Label8.Name = "Label8";
             this.Label8.Size = new System.Drawing.Size(40, 17);
             this.Label8.TabIndex = 71;
@@ -103,7 +102,7 @@
             // 
             // txtCDID
             // 
-            this.txtCDID.Location = new System.Drawing.Point(986, 534);
+            this.txtCDID.Location = new System.Drawing.Point(972, 452);
             this.txtCDID.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDID.Name = "txtCDID";
             this.txtCDID.Size = new System.Drawing.Size(55, 22);
@@ -112,7 +111,7 @@
             // Label7
             // 
             this.Label7.AutoSize = true;
-            this.Label7.Location = new System.Drawing.Point(574, 515);
+            this.Label7.Location = new System.Drawing.Point(560, 433);
             this.Label7.Name = "Label7";
             this.Label7.Size = new System.Drawing.Size(48, 17);
             this.Label7.TabIndex = 70;
@@ -120,7 +119,7 @@
             // 
             // TxtOwnerID
             // 
-            this.TxtOwnerID.Location = new System.Drawing.Point(986, 501);
+            this.TxtOwnerID.Location = new System.Drawing.Point(972, 419);
             this.TxtOwnerID.Margin = new System.Windows.Forms.Padding(4);
             this.TxtOwnerID.Name = "TxtOwnerID";
             this.TxtOwnerID.Size = new System.Drawing.Size(55, 22);
@@ -129,7 +128,7 @@
             // Label6
             // 
             this.Label6.AutoSize = true;
-            this.Label6.Location = new System.Drawing.Point(424, 562);
+            this.Label6.Location = new System.Drawing.Point(410, 480);
             this.Label6.Name = "Label6";
             this.Label6.Size = new System.Drawing.Size(102, 17);
             this.Label6.TabIndex = 69;
@@ -138,7 +137,7 @@
             // Label4
             // 
             this.Label4.AutoSize = true;
-            this.Label4.Location = new System.Drawing.Point(574, 562);
+            this.Label4.Location = new System.Drawing.Point(560, 480);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(116, 17);
             this.Label4.TabIndex = 67;
@@ -147,7 +146,7 @@
             // Label3
             // 
             this.Label3.AutoSize = true;
-            this.Label3.Location = new System.Drawing.Point(134, 562);
+            this.Label3.Location = new System.Drawing.Point(120, 480);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(85, 17);
             this.Label3.TabIndex = 66;
@@ -155,7 +154,7 @@
             // 
             // btnDeleteTracks
             // 
-            this.btnDeleteTracks.Location = new System.Drawing.Point(841, 565);
+            this.btnDeleteTracks.Location = new System.Drawing.Point(827, 483);
             this.btnDeleteTracks.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteTracks.Name = "btnDeleteTracks";
             this.btnDeleteTracks.Size = new System.Drawing.Size(120, 28);
@@ -167,7 +166,7 @@
             // 
             // btnDeleteCD
             // 
-            this.btnDeleteCD.Location = new System.Drawing.Point(841, 529);
+            this.btnDeleteCD.Location = new System.Drawing.Point(827, 447);
             this.btnDeleteCD.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteCD.Name = "btnDeleteCD";
             this.btnDeleteCD.Size = new System.Drawing.Size(120, 28);
@@ -179,7 +178,7 @@
             // 
             // btnDeleteOwner
             // 
-            this.btnDeleteOwner.Location = new System.Drawing.Point(841, 493);
+            this.btnDeleteOwner.Location = new System.Drawing.Point(827, 411);
             this.btnDeleteOwner.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteOwner.Name = "btnDeleteOwner";
             this.btnDeleteOwner.Size = new System.Drawing.Size(120, 28);
@@ -191,7 +190,7 @@
             // 
             // BtnClear
             // 
-            this.BtnClear.Location = new System.Drawing.Point(24, 463);
+            this.BtnClear.Location = new System.Drawing.Point(10, 381);
             this.BtnClear.Margin = new System.Windows.Forms.Padding(4);
             this.BtnClear.Name = "BtnClear";
             this.BtnClear.Size = new System.Drawing.Size(99, 26);
@@ -202,7 +201,7 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(132, 463);
+            this.btnUpdate.Location = new System.Drawing.Point(118, 381);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
             this.btnUpdate.Size = new System.Drawing.Size(100, 28);
@@ -213,7 +212,7 @@
             // 
             // txtCDtrackID
             // 
-            this.txtCDtrackID.Location = new System.Drawing.Point(577, 579);
+            this.txtCDtrackID.Location = new System.Drawing.Point(563, 497);
             this.txtCDtrackID.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDtrackID.Name = "txtCDtrackID";
             this.txtCDtrackID.Size = new System.Drawing.Size(99, 22);
@@ -221,7 +220,7 @@
             // 
             // txtduration
             // 
-            this.txtduration.Location = new System.Drawing.Point(426, 580);
+            this.txtduration.Location = new System.Drawing.Point(412, 498);
             this.txtduration.Margin = new System.Windows.Forms.Padding(4);
             this.txtduration.Name = "txtduration";
             this.txtduration.Size = new System.Drawing.Size(132, 22);
@@ -229,7 +228,7 @@
             // 
             // txttrackname
             // 
-            this.txttrackname.Location = new System.Drawing.Point(135, 580);
+            this.txttrackname.Location = new System.Drawing.Point(121, 498);
             this.txttrackname.Margin = new System.Windows.Forms.Padding(4);
             this.txttrackname.Name = "txttrackname";
             this.txttrackname.Size = new System.Drawing.Size(273, 22);
@@ -237,7 +236,7 @@
             // 
             // btnaddTracks
             // 
-            this.btnaddTracks.Location = new System.Drawing.Point(27, 577);
+            this.btnaddTracks.Location = new System.Drawing.Point(13, 495);
             this.btnaddTracks.Margin = new System.Windows.Forms.Padding(4);
             this.btnaddTracks.Name = "btnaddTracks";
             this.btnaddTracks.Size = new System.Drawing.Size(100, 28);
@@ -248,7 +247,7 @@
             // 
             // txtCDGenre
             // 
-            this.txtCDGenre.Location = new System.Drawing.Point(577, 536);
+            this.txtCDGenre.Location = new System.Drawing.Point(563, 454);
             this.txtCDGenre.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDGenre.Name = "txtCDGenre";
             this.txtCDGenre.Size = new System.Drawing.Size(113, 22);
@@ -256,7 +255,7 @@
             // 
             // txtCDArtist
             // 
-            this.txtCDArtist.Location = new System.Drawing.Point(427, 536);
+            this.txtCDArtist.Location = new System.Drawing.Point(413, 454);
             this.txtCDArtist.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDArtist.Name = "txtCDArtist";
             this.txtCDArtist.Size = new System.Drawing.Size(132, 22);
@@ -264,7 +263,7 @@
             // 
             // txtCDName
             // 
-            this.txtCDName.Location = new System.Drawing.Point(135, 536);
+            this.txtCDName.Location = new System.Drawing.Point(121, 454);
             this.txtCDName.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDName.Multiline = true;
             this.txtCDName.Name = "txtCDName";
@@ -274,7 +273,7 @@
             // 
             // btnAddCD
             // 
-            this.btnAddCD.Location = new System.Drawing.Point(27, 533);
+            this.btnAddCD.Location = new System.Drawing.Point(13, 451);
             this.btnAddCD.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddCD.Name = "btnAddCD";
             this.btnAddCD.Size = new System.Drawing.Size(100, 28);
@@ -285,7 +284,7 @@
             // 
             // txtLN
             // 
-            this.txtLN.Location = new System.Drawing.Point(273, 492);
+            this.txtLN.Location = new System.Drawing.Point(259, 410);
             this.txtLN.Margin = new System.Windows.Forms.Padding(4);
             this.txtLN.Name = "txtLN";
             this.txtLN.Size = new System.Drawing.Size(132, 22);
@@ -293,7 +292,7 @@
             // 
             // txtFN
             // 
-            this.txtFN.Location = new System.Drawing.Point(132, 492);
+            this.txtFN.Location = new System.Drawing.Point(118, 410);
             this.txtFN.Margin = new System.Windows.Forms.Padding(4);
             this.txtFN.Name = "txtFN";
             this.txtFN.Size = new System.Drawing.Size(132, 22);
@@ -301,7 +300,7 @@
             // 
             // btnAddOwner
             // 
-            this.btnAddOwner.Location = new System.Drawing.Point(24, 489);
+            this.btnAddOwner.Location = new System.Drawing.Point(10, 407);
             this.btnAddOwner.Margin = new System.Windows.Forms.Padding(4);
             this.btnAddOwner.Name = "btnAddOwner";
             this.btnAddOwner.Size = new System.Drawing.Size(100, 28);
@@ -315,7 +314,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Label2.Location = new System.Drawing.Point(645, 87);
+            this.Label2.Location = new System.Drawing.Point(631, 5);
             this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(78, 25);
@@ -327,7 +326,7 @@
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Label1.Location = new System.Drawing.Point(83, 278);
+            this.Label1.Location = new System.Drawing.Point(69, 196);
             this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(59, 25);
@@ -339,7 +338,7 @@
             this.Owners.AutoSize = true;
             this.Owners.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Owners.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Owners.Location = new System.Drawing.Point(96, 87);
+            this.Owners.Location = new System.Drawing.Point(82, 5);
             this.Owners.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Owners.Name = "Owners";
             this.Owners.Size = new System.Drawing.Size(86, 25);
@@ -349,7 +348,7 @@
             // DGVtracks
             // 
             this.DGVtracks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVtracks.Location = new System.Drawing.Point(581, 115);
+            this.DGVtracks.Location = new System.Drawing.Point(567, 33);
             this.DGVtracks.Margin = new System.Windows.Forms.Padding(4);
             this.DGVtracks.Name = "DGVtracks";
             this.DGVtracks.Size = new System.Drawing.Size(415, 341);
@@ -358,7 +357,7 @@
             // 
             // TextBox2
             // 
-            this.TextBox2.Location = new System.Drawing.Point(1004, 174);
+            this.TextBox2.Location = new System.Drawing.Point(990, 92);
             this.TextBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.Size = new System.Drawing.Size(100, 22);
@@ -366,7 +365,7 @@
             // 
             // TextBox1
             // 
-            this.TextBox1.Location = new System.Drawing.Point(1001, 134);
+            this.TextBox1.Location = new System.Drawing.Point(987, 52);
             this.TextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.Size = new System.Drawing.Size(100, 22);
@@ -375,7 +374,7 @@
             // ComboBox1
             // 
             this.ComboBox1.FormattingEnabled = true;
-            this.ComboBox1.Location = new System.Drawing.Point(1004, 255);
+            this.ComboBox1.Location = new System.Drawing.Point(990, 173);
             this.ComboBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(124, 24);
@@ -385,7 +384,7 @@
             // 
             this.lbgenre.FormattingEnabled = true;
             this.lbgenre.ItemHeight = 16;
-            this.lbgenre.Location = new System.Drawing.Point(698, 501);
+            this.lbgenre.Location = new System.Drawing.Point(684, 419);
             this.lbgenre.Margin = new System.Windows.Forms.Padding(4);
             this.lbgenre.Name = "lbgenre";
             this.lbgenre.Size = new System.Drawing.Size(135, 100);
@@ -395,7 +394,7 @@
             // DGVCD
             // 
             this.DGVCD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVCD.Location = new System.Drawing.Point(64, 307);
+            this.DGVCD.Location = new System.Drawing.Point(50, 225);
             this.DGVCD.Margin = new System.Windows.Forms.Padding(4);
             this.DGVCD.Name = "DGVCD";
             this.DGVCD.Size = new System.Drawing.Size(497, 149);
@@ -405,27 +404,18 @@
             // DGVOwner
             // 
             this.DGVOwner.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVOwner.Location = new System.Drawing.Point(67, 115);
+            this.DGVOwner.Location = new System.Drawing.Point(53, 33);
             this.DGVOwner.Name = "DGVOwner";
             this.DGVOwner.RowTemplate.Height = 24;
             this.DGVOwner.Size = new System.Drawing.Size(494, 164);
             this.DGVOwner.TabIndex = 73;
             this.DGVOwner.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVOwner_CellContentClick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(143, 13);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 74;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
             // txtGoogle
             // 
-            this.txtGoogle.Location = new System.Drawing.Point(27, 624);
+            this.txtGoogle.Location = new System.Drawing.Point(13, 542);
             this.txtGoogle.Name = "txtGoogle";
-            this.txtGoogle.Size = new System.Drawing.Size(155, 66);
+            this.txtGoogle.Size = new System.Drawing.Size(257, 32);
             this.txtGoogle.TabIndex = 75;
             this.txtGoogle.Text = "Search Google For CD Name";
             this.txtGoogle.UseVisualStyleBackColor = true;
@@ -435,9 +425,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1272, 702);
+            this.ClientSize = new System.Drawing.Size(1124, 588);
             this.Controls.Add(this.txtGoogle);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.Label5);
             this.Controls.Add(this.Label9);
@@ -521,7 +510,6 @@
         internal System.Windows.Forms.Label Label9;
         internal System.Windows.Forms.Label Label5;
         private System.Windows.Forms.DataGridView DGVOwner;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button txtGoogle;
         }
     }
