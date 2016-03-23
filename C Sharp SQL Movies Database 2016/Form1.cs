@@ -206,8 +206,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 string result = null;
 
                 try {
-                    result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text,
-                        txtCDGenre.Text, txtCDID.Text, "Add");
+                    result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text, txtCDGenre.Text, txtCDID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txtCDName.Text + " Adding " + result);
                     DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(TxtOwnerID.Text);
@@ -323,9 +322,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
         #region "Stuff not important"
 
-        private void lbgenre_SelectedIndexChanged(System.Object sender, System.EventArgs e) {
-            TextBox2.Text = lbgenre.SelectedIndex.ToString();
-            }
+
 
         private void DisplayListBox() {
             //clear old data out
@@ -366,11 +363,10 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
 
         #endregion
-
-
-
-
-
+        
+        private void lbgenre_SelectedIndexChanged_1(object sender, EventArgs e) {
+            txtCDGenre.Text = lbgenre.SelectedItem.ToString();
+           }
         }
     }
 

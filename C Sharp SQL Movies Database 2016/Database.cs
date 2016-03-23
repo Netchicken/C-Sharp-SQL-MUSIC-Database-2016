@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace C_Sharp_SQL_Movies_Database_2016 {
     class Database {
@@ -130,74 +131,72 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
         public string InsertOrUpdateOwner(string Firstname, string Lastname, string ID, string AddOrUpdate) {
             try {
-                //Added a Stored Procedure with Parameters 
-                //  var myCommand = new SqlCommand();
-                //   myCommand.Connection = Connection;
+
                 if (AddOrUpdate == "Add") {
-                    //Command = New SqlCommand("INSERT INTO Owner (FirstName, LastName) " & "VALUES(@Firstname, @Lastname)")
 
-                    Command.CommandText = "proc_Add_Owner";
-                    Command.CommandType = CommandType.StoredProcedure;
-                    Command.Parameters.AddWithValue("Firstname", Firstname);
-                    Command.Parameters.AddWithValue("Lastname", Lastname);
-
+                    //Create a Command object  //Create a Query. Create and open a connection to SQL Server 
+                    var myCommand = new SqlCommand("INSERT INTO Owner (FirstName, LastName) " + "VALUES(@Firstname, @Lastname)", Connection);
+                    //create params
+                    myCommand.Parameters.AddWithValue("Firstname", Firstname);
+                    myCommand.Parameters.AddWithValue("Lastname", Lastname);
+                    Connection.Open();
+                    // open connection add in the SQL
+                    myCommand.ExecuteNonQuery();
+                    Connection.Close();
 
                     } else if (AddOrUpdate == "Update") {
-                    Command = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ");
-
-                    var myParam = Command.Parameters;
+                    var myCommand = new SqlCommand("UPDATE Owner set FirstName = @Firstname, LastName=@Lastname where OwnerID = @ID ", Connection);
                     //use parameters to prevent SQL injections
-                    myParam.AddWithValue("Firstname", Firstname);
-                    myParam.AddWithValue("Lastname", Lastname);
-                    myParam.AddWithValue("ID", ID);
+                    myCommand.Parameters.AddWithValue("Firstname", Firstname);
+                    myCommand.Parameters.AddWithValue("Lastname", Lastname);
+                    myCommand.Parameters.AddWithValue("ID", ID);
+                    Connection.Open();
+                    // open connection add in the SQL
+                    myCommand.ExecuteNonQuery();
+                    Connection.Close();
                     }
-                Connection.Open();
-                // open connection add in the SQL
-                Command.ExecuteNonQuery();
-                Connection.Close();
+
                 return " is Successful";
-                } catch {
+                } catch (Exception e) {
                 //need to get it to close a second time as it jumps the first connection.close when ExecuteNonQuery fails.
                 Connection.Close();
-                return " has Failed";
+                return " has Failed with " + e;
                 }
             }
 
         public string AddOrUpdateCD(string OwnerID, string Name, string Artist, string Genre, string CDID, string AddOrUpdate) {
-            Dictionary<string, string> SQLDict = new Dictionary<string, string>();
+            var SQLDict = new Dictionary<string, string>();
+
             SQLDict.Add("Add", "INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
+
             SQLDict.Add("Update", "UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
 
             try {
-                var myCommand = new SqlCommand(SQLDict[AddOrUpdate]);
+                var myCommand = new SqlCommand(SQLDict[AddOrUpdate], Connection);
 
                 //if (AddOrUpdate == "Add") {
                 //    myCommand = new SqlCommand("INSERT INTO CD (OwnerIDFK, Name, Artist, Genre) " + "VALUES(@OwnerID, @Name, @Artist, @Genre)");
                 //    } else if (AddOrUpdate == "Update") {
                 //    myCommand = new SqlCommand("UPDATE CD  set OwnerIDFK=@OwnerID, Name= @Name, Artist=@Artist, Genre=@Genre where CDID = @ID");
                 //    }
+                ;
+                //use parameters to prevent SQL injections
+                myCommand.Parameters.AddWithValue("OwnerID", OwnerID);
+                myCommand.Parameters.AddWithValue("Name", Name);
+                myCommand.Parameters.AddWithValue("Artist", Artist);
+                myCommand.Parameters.AddWithValue("Genre", Genre);
+                myCommand.Parameters.AddWithValue("ID", CDID);
 
-
-                using (myCommand.Connection = Connection) {
-
-                    var myParams = myCommand.Parameters;
-                    //use parameters to prevent SQL injections
-                    myParams.AddWithValue("OwnerID", OwnerID);
-                    myParams.AddWithValue("Name", Name);
-                    myParams.AddWithValue("Artist", Artist);
-                    myParams.AddWithValue("Genre", Genre);
-                    myParams.AddWithValue("ID", CDID);
-
-                    Connection.Open();
-                    // open connection add in the SQL
-                    myCommand.ExecuteNonQuery();
-                    Connection.Close();
-                    Connection.Dispose();
-                    return " is Successful";
-                    }
-                } catch {
+                Connection.Open();
+                // open connection add in the SQL
+                myCommand.ExecuteNonQuery();
                 Connection.Close();
-                return " has Failed";
+                Connection.Dispose();
+                return " is Successful";
+
+                } catch (Exception e) {
+                Connection.Close();
+                return " has Failed with " + e;
                 }
             }
 
@@ -236,21 +235,23 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
 
 
-        public DataTable FillListBoxWithGenre() {
-            DataTable dt = new DataTable();
-            //create a datatable can't have it global as it holds all the data
+        public List<string> FillListBoxWithGenre() {
 
-            string SQL = "select genre from UniqueGenre";
-            using (da = new SqlDataAdapter(SQL, Connection)) {
-                //'connect in to the DB and get the SQL
-                Connection.Open();
-                //open a connection to the DB
-                da.Fill(dt);
-                //fill the datatable from the SQL via the DataAdapter
-                Connection.Close();
-
+            var myCommand = new SqlCommand();
+            myCommand = new SqlCommand("select genre from UniqueGenre", Connection);
+            //Create a list to hold all the grnre, then pass it back to the listbox on the form
+            List<string> newgenre = new List<string>();
+            Connection.Open();
+            SqlDataReader reader = myCommand.ExecuteReader();
+            //loop through the genres and pass it to a reader, that gets added to the list
+            if (reader.HasRows) {
+                while (reader.Read()) {
+                    newgenre.Add(reader["genre"].ToString());
+                    }
                 }
-            return dt;
+            reader.Close();
+            Connection.Close();
+            return newgenre; //send the list back to the listbox
 
             }
 

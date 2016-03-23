@@ -250,7 +250,7 @@
             this.txtCDGenre.Location = new System.Drawing.Point(577, 536);
             this.txtCDGenre.Margin = new System.Windows.Forms.Padding(4);
             this.txtCDGenre.Name = "txtCDGenre";
-            this.txtCDGenre.Size = new System.Drawing.Size(132, 22);
+            this.txtCDGenre.Size = new System.Drawing.Size(113, 22);
             this.txtCDGenre.TabIndex = 54;
             // 
             // txtCDArtist
@@ -357,7 +357,7 @@
             // 
             // TextBox2
             // 
-            this.TextBox2.Location = new System.Drawing.Point(1148, 169);
+            this.TextBox2.Location = new System.Drawing.Point(1004, 174);
             this.TextBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TextBox2.Name = "TextBox2";
             this.TextBox2.Size = new System.Drawing.Size(100, 22);
@@ -365,7 +365,7 @@
             // 
             // TextBox1
             // 
-            this.TextBox1.Location = new System.Drawing.Point(1145, 129);
+            this.TextBox1.Location = new System.Drawing.Point(1001, 134);
             this.TextBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.TextBox1.Name = "TextBox1";
             this.TextBox1.Size = new System.Drawing.Size(100, 22);
@@ -384,11 +384,12 @@
             // 
             this.lbgenre.FormattingEnabled = true;
             this.lbgenre.ItemHeight = 16;
-            this.lbgenre.Location = new System.Drawing.Point(1004, 129);
+            this.lbgenre.Location = new System.Drawing.Point(698, 501);
             this.lbgenre.Margin = new System.Windows.Forms.Padding(4);
             this.lbgenre.Name = "lbgenre";
             this.lbgenre.Size = new System.Drawing.Size(135, 100);
             this.lbgenre.TabIndex = 38;
+            this.lbgenre.SelectedIndexChanged += new System.EventHandler(this.lbgenre_SelectedIndexChanged_1);
             // 
             // DGVCD
             // 
