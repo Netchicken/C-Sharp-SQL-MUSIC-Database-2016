@@ -60,6 +60,7 @@
             this.DGVCD = new System.Windows.Forms.DataGridView();
             this.DGVOwner = new System.Windows.Forms.DataGridView();
             this.button1 = new System.Windows.Forms.Button();
+            this.txtGoogle = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).BeginInit();
@@ -420,11 +421,22 @@
             this.button1.Text = "button1";
             this.button1.UseVisualStyleBackColor = true;
             // 
+            // txtGoogle
+            // 
+            this.txtGoogle.Location = new System.Drawing.Point(27, 624);
+            this.txtGoogle.Name = "txtGoogle";
+            this.txtGoogle.Size = new System.Drawing.Size(155, 66);
+            this.txtGoogle.TabIndex = 75;
+            this.txtGoogle.Text = "Search Google For CD Name";
+            this.txtGoogle.UseVisualStyleBackColor = true;
+            this.txtGoogle.Click += new System.EventHandler(this.txtGoogle_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1272, 702);
+            this.Controls.Add(this.txtGoogle);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.Label5);
@@ -510,6 +522,7 @@
         internal System.Windows.Forms.Label Label5;
         private System.Windows.Forms.DataGridView DGVOwner;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button txtGoogle;
         }
     }
 

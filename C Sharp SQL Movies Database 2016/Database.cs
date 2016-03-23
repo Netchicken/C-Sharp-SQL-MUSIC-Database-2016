@@ -231,7 +231,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
 
 
-
+        //"select * from CD WHERE Genre = @Genre"
 
 
         public List<string> FillListBoxWithGenre() {

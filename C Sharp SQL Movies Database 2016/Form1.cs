@@ -160,37 +160,19 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 switch (fakebutton.Name) {
                     case "btnDeleteOwner":
                         InputID = TxtOwnerID.Text;
-                      
-                        //refresh the DGV
-                       // DGVOwner.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                        //when you delete the owner you want to delete all the CDs and the tracks as well
-                        //if you set the delete rule in the relationships property to cascade down then all the CDs and tracks are automatically deleted, so you need to refresh their DGV's
-                       // DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick("0");
-                        //refresh the DGV with empty
-                      //  DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                      //  DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick("0");
-                        //refresh the DGV with empty
-                      //  DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
- 
                         break;
 
                     case "btnDeleteCD":
                         InputID = txtCDID.Text;
-                       
-                        //refresh the DGV
-                       // DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                         break;
                     case "btnDeleteTracks":
                         InputID = txtTrackID.Text;
-                       
-                        //refresh the DGV
-                       // DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                         break;
                     }
                 //delete the track here and return back success or failure
                 result = myDatabase.DeleteOwnerCDTracks(InputID, fakebutton.Tag.ToString());
                 MessageBox.Show(fakebutton.Tag + " delete " + result);
-               
+
                 //refresh everything
                 DisplayDataGridViewOwner();
                 DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(txtCDID.Text);
@@ -396,7 +378,11 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             }
 
-
+        private void txtGoogle_Click(object sender, EventArgs e) {
+            FrmDetails frm = new FrmDetails(this);
+            frm.Show();
+          //  frm.CDName = txtCDName.Text;
+            }
         }
     }
 

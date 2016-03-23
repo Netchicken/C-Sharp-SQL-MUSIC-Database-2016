@@ -15,7 +15,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
     //IMVDB-APP-KEY: {XYM3LvIh61dpfN4o8eZuzvRH8kY52nTZmG28cLpi}
     //http://imvdb.com/api/v1/search/videos?q=Abba+Mamma+Mia
     //https://imvdb.com/developers/api/searching
-
+    //https://www.google.com/#q=prince&tbm=vid
 
     //http://www.newtonsoft.com/json/help/html/Introduction.htm
     class IMVDB {
@@ -23,7 +23,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
         private string EntityURL = "http://imvdb.com/api/v1/search/entities?q=";  //https://imvdb.com/developers/api/searching
 
 
-        public void DownloadFromNet(string MovieNameForNet) {
+        public void DownloadFromNet(string MusicNameForNet) {
 
             string stringdownload = null;
             using (WebClient request = new WebClient()) {
@@ -31,7 +31,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
                 //downloads the string and returns it
                 //http://msdn.microsoft.com/en-us/library/system.net.webclient%28v=vs.110%29.aspx
-                Uri webaddress = new Uri(VideoURL + MovieNameForNet);
+                Uri webaddress = new Uri(VideoURL + MusicNameForNet);
 
                 try {
                     //download the website as a string. 
