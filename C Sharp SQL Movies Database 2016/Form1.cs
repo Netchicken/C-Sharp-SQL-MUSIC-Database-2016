@@ -160,38 +160,43 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 switch (fakebutton.Name) {
                     case "btnDeleteOwner":
                         InputID = TxtOwnerID.Text;
-                        DisplayDataGridViewOwner();
+                      
                         //refresh the DGV
-                        DGVOwner.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                       // DGVOwner.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                         //when you delete the owner you want to delete all the CDs and the tracks as well
                         //if you set the delete rule in the relationships property to cascade down then all the CDs and tracks are automatically deleted, so you need to refresh their DGV's
-                        DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick("0");
+                       // DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick("0");
                         //refresh the DGV with empty
-                        DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                        DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick("0");
+                      //  DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                      //  DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick("0");
                         //refresh the DGV with empty
-                        DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-
+                      //  DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+ 
                         break;
 
                     case "btnDeleteCD":
                         InputID = txtCDID.Text;
-                        DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(txtCDID.Text);
+                       
                         //refresh the DGV
-                        DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                       // DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                         break;
                     case "btnDeleteTracks":
                         InputID = txtTrackID.Text;
-                        DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDtrackID.Text);
+                       
                         //refresh the DGV
-                        DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
+                       // DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                         break;
                     }
                 //delete the track here and return back success or failure
                 result = myDatabase.DeleteOwnerCDTracks(InputID, fakebutton.Tag.ToString());
                 MessageBox.Show(fakebutton.Tag + " delete " + result);
-                //clear all the textboxes afterwards
-                ClearAllTextBoxes(this);
+               
+                //refresh everything
+                DisplayDataGridViewOwner();
+                DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(txtCDID.Text);
+                DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDtrackID.Text);
+
+                ClearAllTextBoxes(this); //clear all the textboxes afterwards
                 } catch (Exception ex) {
                 MessageBox.Show("First click on the Owner, CD, or Track you want to delete " + ex.Message);
                 }
@@ -363,10 +368,35 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
             }
 
         #endregion
-        
+
         private void lbgenre_SelectedIndexChanged_1(object sender, EventArgs e) {
             txtCDGenre.Text = lbgenre.SelectedItem.ToString();
-           }
+            }
+
+
+
+
+        public void ExtractDataFromNetToJSON(string title, string year, string rated, string released, string genre,
+           string plot, string rentalcost) {
+            //lbmovieDB.Items.Clear();
+            ////this runs automatically when you call  mydata.DownloadFromNet
+            //lblMovieTitle.Text = title;
+            //lbmovieDB.Items.Add(year);
+            //txtReleaseDate.Text = year;
+
+            //lbmovieDB.Items.Add(rated);
+            //lbmovieDB.Items.Add(released);
+            //lbmovieDB.Items.Add(genre);
+            //txtRating.Text = rated;
+            //txtMovieGenre.Text = genre;
+            //txtplot.Text = plot;
+            //txtRentalCost.Text = rentalcost;
+            ////run to update all movies
+            //UpdateMovie(MovieRentedID, rated, title);
+
+            }
+
+
         }
     }
 

@@ -191,7 +191,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 // open connection add in the SQL
                 myCommand.ExecuteNonQuery();
                 Connection.Close();
-               
+
                 return " is Successful";
 
                 } catch (Exception e) {
@@ -211,13 +211,12 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
                 myCommand.Connection = Connection;
 
-                var myParams = myCommand.Parameters;
                 //use parameters to prevent SQL injections
-                myParams.AddWithValue("CDIDFK", CDIDFK);
-                myParams.AddWithValue("CDTrackID", CDTrackID);
-                myParams.AddWithValue("TrackName", TrackName);
-                myParams.AddWithValue("TrackDuration", TrackDuration);
-                myParams.AddWithValue("TrackID", TrackID);
+                myCommand.Parameters.AddWithValue("CDIDFK", CDIDFK);
+                myCommand.Parameters.AddWithValue("CDTrackID", CDTrackID);
+                myCommand.Parameters.AddWithValue("TrackName", TrackName);
+                myCommand.Parameters.AddWithValue("TrackDuration", TrackDuration);
+                myCommand.Parameters.AddWithValue("TrackID", TrackID);
 
                 Connection.Open();
                 // open connection add in the SQL
@@ -225,9 +224,9 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
                 Connection.Close();
 
                 return " is Successful";
-                } catch {
+                } catch (Exception e) {
                 Connection.Close();
-                return " has Failed";
+                return " has Failed with " + e;
                 }
             }
 
