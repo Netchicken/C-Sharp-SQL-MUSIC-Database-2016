@@ -378,19 +378,26 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
             }
 
-        private void txtGoogle_Click(object sender, EventArgs e)
-        {
-            if (txtCDName.Text == "")
-            {
-                MessageBox.Show("Click on a CD first Dimwit");
-            }
-            else
-            {
+        private void txtGoogle_Click(object sender, EventArgs e) {
+
+
+            TestForm mytestform = new TestForm();
+           mytestform.Show();
+          BridgeToFormTest.DataIn = txtCDName.Text;
+ 
+
+            if (string.IsNullOrEmpty(txtCDName.Text)) {
+               // MessageBox.Show("Click on a CD first Dimwit");
+                } else {
                 FrmDetails frm = new FrmDetails(this);
                 frm.Show();
-                
+
+                }
+            }
+
+        private void ComboBox1_SelectedIndexChanged_1(object sender, EventArgs e) {
+
             }
         }
-    }
     }
 

@@ -5,6 +5,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
 namespace C_Sharp_SQL_Movies_Database_2016 {
@@ -44,50 +45,149 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
                 }
             }
+        public class Artist {
+            public string name { get; set; }
+            public string slug { get; set; }
+            public string url { get; set; }
+            }
+
+        public class Result {
+            public object id { get; set; }
+            public string production_status { get; set; }
+            public object song_title { get; set; }
+            public object song_slug { get; set; }
+            public string url { get; set; }
+            public bool multiple_versions { get; set; }
+            public object version_name { get; set; }
+            public int version_number { get; set; }
+            public bool is_imvdb_pick { get; set; }
+            public object aspect_ratio { get; set; }
+            public int? year { get; set; }
+            public bool verified_credits { get; set; }
+            public List<Artist> artists { get; set; }
+            public object image { get; set; }
+            }
+
+        public class RootObject {
+            public int total_results { get; set; }
+            public int current_page { get; set; }
+            public int per_page { get; set; }
+            public int total_pages { get; set; }
+            public List<Result> results { get; set; }
+            }
 
         public void ParseTheDownload(string stringdownload) {
 
-            JObject JSONobject = JObject.Parse(stringdownload);
+           // JObject JSONobject = JObject.Parse(stringdownload);
 
             string rentalcost = null;
             //{    "Response": "False",    "Error": "Must provide more than one character."  }
 
-            if (stringdownload.Contains("Movie not found!") == false && stringdownload.Contains("Must provide more than one character") == false) {
-                //parse out the values from the JSON
-                //Calculate the rental cost
-                int thisyear = DateTime.Today.Date.Year;
-                int ReleaseDate = 0;
-                try {
-                    ReleaseDate = (int)JSONobject["Year"];
-                    } catch {
-                    ReleaseDate = 2000;
-                    }
-
-                if ((thisyear - ReleaseDate) <= 5) {
-                    rentalcost = String.Format("0:C", 5.0);
-                    } else {
-                    rentalcost = String.Format("0:C", 2.0);
-                    }
-
-                //pass the extracted data and rental cost back to the main form, so it can be displayed
-                Form1 myForm1 = new Form1();
-                myForm1.ExtractDataFromNetToJSON(JSONobject["Title"].ToString(), JSONobject["Year"].ToString(), JSONobject["Rated"].ToString(), JSONobject["Released"].ToString(), JSONobject["Genre"].ToString(), JSONobject["Plot"].ToString(), rentalcost);
+            //parse out the values from the JSON
+            //Calculate the rental cost
 
 
-                } else {
-                //  txtReleaseDate.Text = "2000"
-                //   txtMovieGenre.Text = "Unknown"
-                rentalcost = String.Format("0:C", 2.0);
-                // Form1.ExtractDataFromNetToJSON(JSONobject.Item("Title").ToString(), JSONobject.Item("Year").ToString(), JSONobject.Item("Rated").ToString(), "2000", "Unknown", JSONobject.Item("Plot").ToString(), rentalcost)
+            //   http://www.newtonsoft.com/json/help/html/SerializingJSONFragments.htm
+            JObject googleSearch = JObject.Parse(stringdownload);
+            
+// get JSON result objects into a list
+IList<JToken> results = googleSearch["responseData"]["results"].Children().ToList();
+           
+// serialize JSON results into .NET objects
+IList<Result> searchResults = new List<Result>();
+            foreach(JToken result in results)
+{
+                    Result searchResult = JsonConvert.DeserializeObject<Result>(result.ToString());
+                    searchResults.Add(searchResult);
                 }
+
+            //"url": "https:\/\/imvdb.com\/video\/belles-whistles\/princess",
+            // ReleaseDate = (string)JSONobject["url"];
+            //} catch {
+            //ReleaseDate = 2000;
+            //}
+
+
+
+            //pass the extracted data and rental cost back to the main form, so it can be displayed
+            //Form1 myForm1 = new Form1();
+            //myForm1.ExtractDataFromNetToJSON(JSONobject["Title"].ToString(), JSONobject["Year"].ToString(), JSONobject["Rated"].ToString(), JSONobject["Released"].ToString(), JSONobject["Genre"].ToString(), JSONobject["Plot"].ToString(), rentalcost);
+
+
+
+            //  txtReleaseDate.Text = "2000"
+            //   txtMovieGenre.Text = "Unknown"
+            rentalcost = String.Format("0:C", 2.0);
+                // Form1.ExtractDataFromNetToJSON(JSONobject.Item("Title").ToString(), JSONobject.Item("Year").ToString(), JSONobject.Item("Rated").ToString(), "2000", "Unknown", JSONobject.Item("Plot").ToString(), rentalcost)
+              
 
 
 
             }
 
+        //http://json2csharp.com/ awesome converter
 
-
-
+        //      "total_results": 135,
+        //"current_page": 1,
+        //"per_page": 25,
+        //"total_pages": 6,
+        //"results": [
+        //    {
+        //        "id": 122578500383,
+        //        "production_status": "r",
+        //        "song_title": "Princess",
+        //        "song_slug": "princess",
+        //        "url": "https:\/\/imvdb.com\/video\/belles-whistles\/princess",
+        //        "multiple_versions": false,
+        //        "version_name": null,
+        //        "version_number": 1,
+        //        "is_imvdb_pick": false,
+        //        "aspect_ratio": null,
+        //        "year": 2014,
+        //        "verified_credits": false,
+        //        "artists": [
+        //            {
+        //                "name": "Belles & Whistles",
+        //                "slug": "belles-whistles",
+        //                "url": "https:\/\/imvdb.com\/n\/belles-whistles"
+        //            }
+        //        ],
+        //        "image": {
+        //            "o": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/122578500383-belles-whistles-princess_music_video_ov.jpg?v=2",
+        //            "l": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/122578500383-belles-whistles-princess_music_video_lv.jpg?v=2",
+        //            "b": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/122578500383-belles-whistles-princess_music_video_bv.jpg?v=2",
+        //            "t": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/122578500383-belles-whistles-princess_music_video_tv.jpg?v=2",
+        //            "s": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/122578500383-belles-whistles-princess_music_video_sv.jpg?v=2"
+        //        }
+        //    },
+        //    {
+        //        "id": 101300311348,
+        //        "production_status": "r",
+        //        "song_title": "Fresh Prince",
+        //        "song_slug": "fresh-prince",
+        //        "url": "https:\/\/imvdb.com\/video\/soprano-2\/fresh-prince",
+        //        "multiple_versions": false,
+        //        "version_name": null,
+        //        "version_number": 1,
+        //        "is_imvdb_pick": false,
+        //        "aspect_ratio": null,
+        //        "year": 2014,
+        //        "verified_credits": false,
+        //        "artists": [
+        //            {
+        //                "name": "Soprano (2)",
+        //                "slug": "soprano-2",
+        //                "url": "https:\/\/imvdb.com\/n\/soprano-2"
+        //            }
+        //        ],
+        //        "image": {
+        //            "o": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/101300311348-soprano-2-fresh-prince_music_video_ov.jpg?v=2",
+        //            "l": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/101300311348-soprano-2-fresh-prince_music_video_lv.jpg?v=2",
+        //            "b": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/101300311348-soprano-2-fresh-prince_music_video_bv.jpg?v=2",
+        //            "t": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/101300311348-soprano-2-fresh-prince_music_video_tv.jpg?v=2",
+        //            "s": "https:\/\/s3.amazonaws.com\/images.imvdb.com\/video\/101300311348-soprano-2-fresh-prince_music_video_sv.jpg?v=2"
+        //        }
+        //    },
 
 
         }

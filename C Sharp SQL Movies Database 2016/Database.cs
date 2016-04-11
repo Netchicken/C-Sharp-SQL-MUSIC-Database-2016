@@ -235,7 +235,7 @@ namespace C_Sharp_SQL_Movies_Database_2016 {
 
 
         public List<string> FillListBoxWithGenre() {
-
+            //
             var myCommand = new SqlCommand();
             myCommand = new SqlCommand("select genre from UniqueGenre", Connection);
             //Create a list to hold all the grnre, then pass it back to the listbox on the form

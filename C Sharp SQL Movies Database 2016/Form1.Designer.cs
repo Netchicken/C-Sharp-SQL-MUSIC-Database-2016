@@ -379,6 +379,7 @@
             this.ComboBox1.Name = "ComboBox1";
             this.ComboBox1.Size = new System.Drawing.Size(124, 24);
             this.ComboBox1.TabIndex = 39;
+            this.ComboBox1.SelectedIndexChanged += new System.EventHandler(this.ComboBox1_SelectedIndexChanged_1);
             // 
             // lbgenre
             // 
@@ -425,7 +426,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1124, 588);
+            this.ClientSize = new System.Drawing.Size(1153, 588);
             this.Controls.Add(this.txtGoogle);
             this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.Label5);

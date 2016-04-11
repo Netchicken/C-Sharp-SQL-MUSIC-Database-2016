@@ -42,7 +42,7 @@
             this.ClientSize = new System.Drawing.Size(1048, 463);
             this.Controls.Add(this.webBrowser1);
             this.Name = "FrmDetails";
-            this.Text = "FrnDetails";
+            this.Text = "Google Video Search";
             this.ResumeLayout(false);
 
             }
