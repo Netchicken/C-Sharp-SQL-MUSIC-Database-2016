@@ -90,6 +90,7 @@
             this.txtTrackID.Name = "txtTrackID";
             this.txtTrackID.Size = new System.Drawing.Size(55, 22);
             this.txtTrackID.TabIndex = 65;
+            this.txtTrackID.Tag = "";
             // 
             // Label8
             // 
@@ -107,6 +108,7 @@
             this.txtCDID.Name = "txtCDID";
             this.txtCDID.Size = new System.Drawing.Size(55, 22);
             this.txtCDID.TabIndex = 55;
+            this.txtCDID.Tag = "";
             // 
             // Label7
             // 
@@ -124,6 +126,7 @@
             this.TxtOwnerID.Name = "TxtOwnerID";
             this.TxtOwnerID.Size = new System.Drawing.Size(55, 22);
             this.TxtOwnerID.TabIndex = 50;
+            this.TxtOwnerID.Tag = "";
             // 
             // Label6
             // 
@@ -217,6 +220,7 @@
             this.txtCDtrackID.Name = "txtCDtrackID";
             this.txtCDtrackID.Size = new System.Drawing.Size(99, 22);
             this.txtCDtrackID.TabIndex = 59;
+            this.txtCDtrackID.Tag = "Track";
             // 
             // txtduration
             // 
@@ -225,6 +229,7 @@
             this.txtduration.Name = "txtduration";
             this.txtduration.Size = new System.Drawing.Size(132, 22);
             this.txtduration.TabIndex = 58;
+            this.txtduration.Tag = "Track";
             // 
             // txttrackname
             // 
@@ -233,6 +238,7 @@
             this.txttrackname.Name = "txttrackname";
             this.txttrackname.Size = new System.Drawing.Size(273, 22);
             this.txttrackname.TabIndex = 57;
+            this.txttrackname.Tag = "Track";
             // 
             // btnaddTracks
             // 
@@ -252,6 +258,7 @@
             this.txtCDGenre.Name = "txtCDGenre";
             this.txtCDGenre.Size = new System.Drawing.Size(113, 22);
             this.txtCDGenre.TabIndex = 54;
+            this.txtCDGenre.Tag = "CD";
             // 
             // txtCDArtist
             // 
@@ -260,6 +267,7 @@
             this.txtCDArtist.Name = "txtCDArtist";
             this.txtCDArtist.Size = new System.Drawing.Size(132, 22);
             this.txtCDArtist.TabIndex = 53;
+            this.txtCDArtist.Tag = "CD";
             // 
             // txtCDName
             // 
@@ -270,6 +278,7 @@
             this.txtCDName.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.txtCDName.Size = new System.Drawing.Size(273, 22);
             this.txtCDName.TabIndex = 52;
+            this.txtCDName.Tag = "CD";
             // 
             // btnAddCD
             // 
@@ -289,6 +298,7 @@
             this.txtLN.Name = "txtLN";
             this.txtLN.Size = new System.Drawing.Size(132, 22);
             this.txtLN.TabIndex = 49;
+            this.txtLN.Tag = "Owner";
             // 
             // txtFN
             // 
@@ -297,6 +307,7 @@
             this.txtFN.Name = "txtFN";
             this.txtFN.Size = new System.Drawing.Size(132, 22);
             this.txtFN.TabIndex = 48;
+            this.txtFN.Tag = "Owner";
             // 
             // btnAddOwner
             // 
