@@ -40,7 +40,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
             DGVOwner.DataSource = null;
             try
             {
-                DGVOwner.DataSource = myDatabase.FillDGVOwnerWithOwner();
+                DGVOwner.DataSource = myDatabase.AllFillDGVWithData("Owner", "0");
                 //pass the datatable data to the DataGridView
                 DGVOwner.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
             }
@@ -64,7 +64,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 if (e.RowIndex >= 0)
                 {
                     //Fill the next CD DGV with the OwnerID
-                    DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(OwnerID.ToString());
+                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("Owner", OwnerID.ToString());
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     TxtOwnerID.Text = OwnerID.ToString();
                     //   Me.Text = OwnerID 'check to see that its working
@@ -122,7 +122,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 if (e.RowIndex >= 0)
                 {
                     //  DisplayDataGridViewTracks(CDID)
-                    DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(CDID);
+                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", CDID);
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                     txtCDName.Text = CDname.Trim();
@@ -189,18 +189,18 @@ namespace C_Sharp_SQL_Movies_Database_2016
         /// <param name="Tag">In the control Tag property</param>
         /// <returns>true / false</returns>
 
-        public bool IsTextBoxEmpty(Control root, string Tag)
+        public bool IsTheTextBoxEmpty(Control root, string Tag)
         {
             foreach (Control ctrl in root.Controls)
             {
-                if (ctrl is TextBox) //delete this?     If it is a textbox
+                if (ctrl is TextBox) //   If it is a textbox
                 {
                     if ((string)(ctrl as TextBox).Tag == Tag) //and it has a tag equal to Tag
                     {
                         if (((TextBox)ctrl).Text == string.Empty)
-                        //and the textbox is not empty
+                        //and the textbox is  empty 
                         {
-                            return true;
+                            return true; //this should stop on the first empty textbox, which is what we want. 
                         }
                     }
                 }
@@ -239,8 +239,8 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
                 //refresh everything
                 DisplayDataGridViewOwner();
-                DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(txtCDID.Text);
-                DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDtrackID.Text);
+                DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", txtCDID.Text);
+                DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDtrackID.Text);
 
                 ClearAllTextBoxes(this); //clear all the textboxes afterwards
             }
@@ -253,7 +253,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         //ADD CD
         private void btnAddCD_Click(object sender, EventArgs e)
         {//only run if there is something in the textboxes
-            if (!IsTextBoxEmpty(this, "CD"))
+            if (!IsTheTextBoxEmpty(this, "CD"))
             {
                 string result = null;
 
@@ -262,7 +262,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                     result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text, txtCDGenre.Text, txtCDID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txtCDName.Text + " Adding " + result);
-                    DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(TxtOwnerID.Text);
+                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", (TxtOwnerID.Text));
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -282,7 +282,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         private void btnaddTracks_Click(object sender, EventArgs e)
         {
             //only run if there is something in the textboxes
-            if (!IsTextBoxEmpty(this, "Track"))
+            if (!IsTheTextBoxEmpty(this, "Track"))
             {
                 string result = null;
                 try
@@ -290,7 +290,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                     result = myDatabase.AddOrUpdateCDTrack(txtCDID.Text, txtCDtrackID.Text, txttrackname.Text, txtduration.Text, txtTrackID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txttrackname.Text + " Adding " + result);
-                    DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDID.Text);
+                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -314,7 +314,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
             //only run if there is something in the textboxes
 
-            if (!IsTextBoxEmpty(this, "Owner"))
+            if (!IsTheTextBoxEmpty(this, "Owner"))
 
             {
                 string result = null;
@@ -339,7 +339,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
             //Update the CD
             //only run if there is something in the textboxes
-            if (!IsTextBoxEmpty(this, "CD"))
+            if (!IsTheTextBoxEmpty(this, "CD"))
             {
                 string result = null;
                 try
@@ -348,7 +348,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                         txtCDGenre.Text, txtCDID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txtCDName.Text + " Updating " + result);
-                    DGVCD.DataSource = myDatabase.FillDGVCDWithOwnerClick(TxtOwnerID.Text);
+                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", (TxtOwnerID.Text));
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -365,7 +365,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
             //Update the Tracks
             //only run if there is something in the textboxes And
-            if (!IsTextBoxEmpty(this, "Track"))
+            if (!IsTheTextBoxEmpty(this, "Track"))
             {
                 string result = null;
                 try
@@ -374,7 +374,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                         txtduration.Text, txtTrackID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txttrackname.Text + " Updating " + result);
-                    DGVtracks.DataSource = myDatabase.FillDGVTracksWithCDClick(txtCDID.Text);
+                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }

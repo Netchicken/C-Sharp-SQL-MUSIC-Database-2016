@@ -27,21 +27,56 @@ namespace C_Sharp_SQL_Movies_Database_2016
             Connection.ConnectionString = connectionString;
             Command.Connection = Connection;
         }
-        public DataTable FillDGVOwnerWithOwner()
-        {
-            DataTable dt = new DataTable();
-            //create a datatable as we only have one table, the Owner
 
-            using (da = new SqlDataAdapter("select * from Owner ", Connection))
+        //combining all together
+        public DataTable AllFillDGVWithData(string Name, string ID)
+        {
+            string SQL = null;
+            switch (Name)
             {
-                //connect in to the DB and get the SQL
+                case "Owner":
+                    SQL = "select * from Owner ";
+                    break;
+
+                case "CD":
+                    SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + ID + "' ";
+                    break;
+
+                case "Track":
+                    SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + ID +
+                          "' ";
+                    break;
+            }
+
+            using (da = new SqlDataAdapter(SQL, Connection))
+            {//connect in to the DB and get the SQL
+                DataTable mydt = new DataTable();
+                //create a datatable as we only have one table, the Owner
                 Connection.Open();
                 //open a connection to the DB
-                da.Fill(dt);
+                da.Fill(mydt);
                 //fill the datatable from the SQL 
                 Connection.Close(); //close the connection
+                return mydt; //pass the datatable data to the DataGridView
             }
-            return dt; //pass the datatable data to the DataGridView
+
+        }
+
+        #region Unused DB Calls all superceeded by AllFillDGVWithData
+        public DataTable FillDGVOwnerWithOwner()
+        {
+            using (da = new SqlDataAdapter("select * from Owner ", Connection))
+            {//connect in to the DB and get the SQL
+                DataTable mydt = new DataTable();
+                //create a datatable as we only have one table, the Owner
+                Connection.Open();
+                //open a connection to the DB
+                da.Fill(mydt);
+                //fill the datatable from the SQL 
+                Connection.Close(); //close the connection
+                return mydt; //pass the datatable data to the DataGridView
+            }
+
         }
         public DataTable FillDGVCDWithOwnerClick(string OwnerID)
         {
@@ -50,23 +85,23 @@ namespace C_Sharp_SQL_Movies_Database_2016
             {
 
                 //connect in to the DB and get the SQL
-                DataTable dt = new DataTable();
+                DataTable mydt = new DataTable();
                 //create a datatable as we only have one table, the Owner
 
                 Connection.Open();
                 //open a connection to the DB
-                da.Fill(dt);
+                da.Fill(mydt);
                 //fill the datatable from the SQL 
                 Connection.Close();
                 //close the connection
 
-                return dt;
+                return mydt;
             }
         }
         public DataTable FillDGVTracksWithCDClick(string CDID)
         {
 
-            DataTable dt = new DataTable();
+            DataTable mydt = new DataTable();
             //create a datatable
             string SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + CDID + "' ";
 
@@ -75,13 +110,16 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
             Connection.Open();
             //open a connection to the DB
-            da.Fill(dt);
+            da.Fill(mydt);
             //fill the datatable from the SQL 
             Connection.Close();
             //close the connection
 
-            return dt;
+            return mydt;
         }
+        #endregion
+
+
         public string DeleteOwnerCDTracks(string ID, string Table)
         {
             //only run if there is something in the textbox
