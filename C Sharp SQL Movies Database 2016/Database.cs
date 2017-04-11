@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,7 +17,9 @@ namespace C_Sharp_SQL_Movies_Database_2016
         private SqlConnection Connection = new SqlConnection();
         private SqlCommand Command = new SqlCommand();
         private SqlDataAdapter da = new SqlDataAdapter();
-
+        private List<Tracks> myTrack = new List<Tracks>();
+        private List<CD> myCD = new List<CD>();
+        private List<Owner> myOwner = new List<Owner>();
 
 
         //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
@@ -31,20 +35,24 @@ namespace C_Sharp_SQL_Movies_Database_2016
         //combining all together
         public DataTable AllFillDGVWithData(string Name, string ID)
         {
+
             string SQL = null;
             switch (Name)
             {
                 case "Owner":
                     SQL = "select * from Owner ";
+
                     break;
 
                 case "CD":
                     SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + ID + "' ";
+
                     break;
 
                 case "Track":
                     SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + ID +
                           "' ";
+
                     break;
             }
 
@@ -57,13 +65,15 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 da.Fill(mydt);
                 //fill the datatable from the SQL 
                 Connection.Close(); //close the connection
+
+
                 return mydt; //pass the datatable data to the DataGridView
             }
 
         }
 
         #region Unused DB Calls all superceeded by AllFillDGVWithData
-        public DataTable FillDGVOwnerWithOwner()
+        public void FillDGVOwnerWithOwner()
         {
             using (da = new SqlDataAdapter("select * from Owner ", Connection))
             {//connect in to the DB and get the SQL
@@ -74,7 +84,16 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 da.Fill(mydt);
                 //fill the datatable from the SQL 
                 Connection.Close(); //close the connection
-                return mydt; //pass the datatable data to the DataGridView
+
+                myOwner = mydt.AsEnumerable().Select(row =>
+                    new Owner
+                    {
+                        OwnerID = row.Field<int>("OwnerID"),
+                        FirstName = row.Field<string>("FirstName"),
+                        LastName = row.Field<string>("LastName")
+                    }).ToList();
+
+                //   return mydt; //pass the datatable data to the DataGridView
             }
 
         }

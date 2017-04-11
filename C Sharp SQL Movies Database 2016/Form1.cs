@@ -15,7 +15,9 @@ namespace C_Sharp_SQL_Movies_Database_2016
     {
         //create an instance of the Database class
         Database myDatabase = new Database();
-
+        Tracks myTrack = new Tracks();
+        CD myCD = new CD();
+        Owner myOwner = new Owner();
         public Form1()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
             DisplayDataGridViewOwner();
             //fill the combo box as an example
             comboboxfill();
+            myDatabase.FillDGVOwnerWithOwner();
         }
 
 
@@ -42,7 +45,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
             {
                 DGVOwner.DataSource = myDatabase.AllFillDGVWithData("Owner", "0");
                 //pass the datatable data to the DataGridView
-                DGVOwner.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
+                DGVOwner.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
             catch (Exception ex)
             {
@@ -64,7 +67,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 if (e.RowIndex >= 0)
                 {
                     //Fill the next CD DGV with the OwnerID
-                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("Owner", OwnerID.ToString());
+                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", OwnerID.ToString());
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                     TxtOwnerID.Text = OwnerID.ToString();
                     //   Me.Text = OwnerID 'check to see that its working
@@ -140,10 +143,6 @@ namespace C_Sharp_SQL_Movies_Database_2016
         //CLICK EVENT FOR TRACKS 
         private void DGVtracks_CellContentClick(Object sender, DataGridViewCellEventArgs e)
         {
-            //string Trackname = null;
-            //string trackduration = null;
-            //string trackID = null;
-            //string CDTrackID = null;
 
             try
             {
@@ -151,10 +150,6 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 txtduration.Text = DGVtracks.Rows[e.RowIndex].Cells[1].Value.ToString();
                 txtTrackID.Text = DGVtracks.Rows[e.RowIndex].Cells[2].Value.ToString();
                 txtCDtrackID.Text = DGVtracks.Rows[e.RowIndex].Cells[3].Value.ToString();
-                //txttrackname.Text = Trackname;
-                //txtduration.Text = trackduration;
-                //txtTrackID.Text = trackID;
-                //txtCDtrackID.Text = CDTrackID;
             }
             catch (Exception ex)
             {
