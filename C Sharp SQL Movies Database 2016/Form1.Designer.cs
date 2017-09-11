@@ -60,9 +60,19 @@
             this.DGVCD = new System.Windows.Forms.DataGridView();
             this.DGVOwner = new System.Windows.Forms.DataGridView();
             this.txtGoogle = new System.Windows.Forms.Button();
+            this.tabOwner = new System.Windows.Forms.TabControl();
+            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).BeginInit();
+            this.tabOwner.SuspendLayout();
+            this.tabPage1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Label5
@@ -157,10 +167,11 @@
             // 
             // btnDeleteTracks
             // 
-            this.btnDeleteTracks.Location = new System.Drawing.Point(827, 483);
+            this.btnDeleteTracks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteTracks.Location = new System.Drawing.Point(288, 4);
             this.btnDeleteTracks.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteTracks.Name = "btnDeleteTracks";
-            this.btnDeleteTracks.Size = new System.Drawing.Size(120, 28);
+            this.btnDeleteTracks.Size = new System.Drawing.Size(118, 22);
             this.btnDeleteTracks.TabIndex = 64;
             this.btnDeleteTracks.Tag = "Track";
             this.btnDeleteTracks.Text = "Delete Track";
@@ -169,10 +180,11 @@
             // 
             // btnDeleteCD
             // 
-            this.btnDeleteCD.Location = new System.Drawing.Point(827, 447);
+            this.btnDeleteCD.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteCD.Location = new System.Drawing.Point(146, 34);
             this.btnDeleteCD.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteCD.Name = "btnDeleteCD";
-            this.btnDeleteCD.Size = new System.Drawing.Size(120, 28);
+            this.btnDeleteCD.Size = new System.Drawing.Size(134, 23);
             this.btnDeleteCD.TabIndex = 63;
             this.btnDeleteCD.Tag = "CD";
             this.btnDeleteCD.Text = "Delete CD";
@@ -181,10 +193,11 @@
             // 
             // btnDeleteOwner
             // 
-            this.btnDeleteOwner.Location = new System.Drawing.Point(827, 411);
+            this.btnDeleteOwner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnDeleteOwner.Location = new System.Drawing.Point(4, 34);
             this.btnDeleteOwner.Margin = new System.Windows.Forms.Padding(4);
             this.btnDeleteOwner.Name = "btnDeleteOwner";
-            this.btnDeleteOwner.Size = new System.Drawing.Size(120, 28);
+            this.btnDeleteOwner.Size = new System.Drawing.Size(134, 23);
             this.btnDeleteOwner.TabIndex = 62;
             this.btnDeleteOwner.Tag = "Owner";
             this.btnDeleteOwner.Text = "Delete Owner";
@@ -193,10 +206,11 @@
             // 
             // BtnClear
             // 
-            this.BtnClear.Location = new System.Drawing.Point(10, 381);
+            this.BtnClear.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.BtnClear.Location = new System.Drawing.Point(4, 4);
             this.BtnClear.Margin = new System.Windows.Forms.Padding(4);
             this.BtnClear.Name = "BtnClear";
-            this.BtnClear.Size = new System.Drawing.Size(99, 26);
+            this.BtnClear.Size = new System.Drawing.Size(134, 22);
             this.BtnClear.TabIndex = 61;
             this.BtnClear.Text = "Clear All";
             this.BtnClear.UseVisualStyleBackColor = true;
@@ -204,10 +218,11 @@
             // 
             // btnUpdate
             // 
-            this.btnUpdate.Location = new System.Drawing.Point(118, 381);
+            this.btnUpdate.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnUpdate.Location = new System.Drawing.Point(146, 4);
             this.btnUpdate.Margin = new System.Windows.Forms.Padding(4);
             this.btnUpdate.Name = "btnUpdate";
-            this.btnUpdate.Size = new System.Drawing.Size(100, 28);
+            this.btnUpdate.Size = new System.Drawing.Size(134, 22);
             this.btnUpdate.TabIndex = 60;
             this.btnUpdate.Text = "Update All";
             this.btnUpdate.UseVisualStyleBackColor = true;
@@ -325,7 +340,7 @@
             this.Label2.AutoSize = true;
             this.Label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Label2.Location = new System.Drawing.Point(631, 5);
+            this.Label2.Location = new System.Drawing.Point(1045, 532);
             this.Label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label2.Name = "Label2";
             this.Label2.Size = new System.Drawing.Size(78, 25);
@@ -337,7 +352,7 @@
             this.Label1.AutoSize = true;
             this.Label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Label1.Location = new System.Drawing.Point(69, 196);
+            this.Label1.Location = new System.Drawing.Point(888, 542);
             this.Label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Label1.Name = "Label1";
             this.Label1.Size = new System.Drawing.Size(59, 25);
@@ -349,7 +364,7 @@
             this.Owners.AutoSize = true;
             this.Owners.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Owners.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
-            this.Owners.Location = new System.Drawing.Point(82, 5);
+            this.Owners.Location = new System.Drawing.Point(967, 542);
             this.Owners.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Owners.Name = "Owners";
             this.Owners.Size = new System.Drawing.Size(86, 25);
@@ -359,10 +374,11 @@
             // DGVtracks
             // 
             this.DGVtracks.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVtracks.Location = new System.Drawing.Point(567, 33);
+            this.DGVtracks.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGVtracks.Location = new System.Drawing.Point(3, 3);
             this.DGVtracks.Margin = new System.Windows.Forms.Padding(4);
             this.DGVtracks.Name = "DGVtracks";
-            this.DGVtracks.Size = new System.Drawing.Size(415, 341);
+            this.DGVtracks.Size = new System.Drawing.Size(579, 299);
             this.DGVtracks.TabIndex = 42;
             this.DGVtracks.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVtracks_CellContentClick);
             // 
@@ -406,20 +422,22 @@
             // DGVCD
             // 
             this.DGVCD.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVCD.Location = new System.Drawing.Point(50, 225);
+            this.DGVCD.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGVCD.Location = new System.Drawing.Point(3, 3);
             this.DGVCD.Margin = new System.Windows.Forms.Padding(4);
             this.DGVCD.Name = "DGVCD";
-            this.DGVCD.Size = new System.Drawing.Size(497, 149);
+            this.DGVCD.Size = new System.Drawing.Size(579, 299);
             this.DGVCD.TabIndex = 37;
             this.DGVCD.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVCD_CellContentClick);
             // 
             // DGVOwner
             // 
             this.DGVOwner.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGVOwner.Location = new System.Drawing.Point(53, 33);
+            this.DGVOwner.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DGVOwner.Location = new System.Drawing.Point(3, 3);
             this.DGVOwner.Name = "DGVOwner";
             this.DGVOwner.RowTemplate.Height = 24;
-            this.DGVOwner.Size = new System.Drawing.Size(494, 164);
+            this.DGVOwner.Size = new System.Drawing.Size(579, 299);
             this.DGVOwner.TabIndex = 73;
             this.DGVOwner.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGVOwner_CellContentClick);
             // 
@@ -433,13 +451,77 @@
             this.txtGoogle.UseVisualStyleBackColor = true;
             this.txtGoogle.Click += new System.EventHandler(this.txtGoogle_Click);
             // 
+            // tabOwner
+            // 
+            this.tabOwner.Controls.Add(this.tabPage1);
+            this.tabOwner.Controls.Add(this.tabPage2);
+            this.tabOwner.Controls.Add(this.tabPage3);
+            this.tabOwner.Location = new System.Drawing.Point(15, 12);
+            this.tabOwner.Name = "tabOwner";
+            this.tabOwner.SelectedIndex = 0;
+            this.tabOwner.Size = new System.Drawing.Size(593, 334);
+            this.tabOwner.TabIndex = 76;
+            // 
+            // tabPage1
+            // 
+            this.tabPage1.Controls.Add(this.DGVOwner);
+            this.tabPage1.Location = new System.Drawing.Point(4, 25);
+            this.tabPage1.Name = "tabPage1";
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage1.Size = new System.Drawing.Size(585, 305);
+            this.tabPage1.TabIndex = 0;
+            this.tabPage1.Text = "Owner";
+            this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.DGVCD);
+            this.tabPage2.Location = new System.Drawing.Point(4, 25);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(585, 305);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "CD";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.DGVtracks);
+            this.tabPage3.Location = new System.Drawing.Point(4, 25);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(585, 305);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Tracks";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 3;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 126F));
+            this.tableLayoutPanel1.Controls.Add(this.BtnClear, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnUpdate, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeleteOwner, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeleteCD, 1, 1);
+            this.tableLayoutPanel1.Controls.Add(this.btnDeleteTracks, 2, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(655, 298);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(410, 61);
+            this.tableLayoutPanel1.TabIndex = 77;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 588);
+            this.Controls.Add(this.tableLayoutPanel1);
+            this.Controls.Add(this.tabOwner);
             this.Controls.Add(this.txtGoogle);
-            this.Controls.Add(this.DGVOwner);
             this.Controls.Add(this.Label5);
             this.Controls.Add(this.Label9);
             this.Controls.Add(this.txtTrackID);
@@ -450,11 +532,6 @@
             this.Controls.Add(this.Label6);
             this.Controls.Add(this.Label4);
             this.Controls.Add(this.Label3);
-            this.Controls.Add(this.btnDeleteTracks);
-            this.Controls.Add(this.btnDeleteCD);
-            this.Controls.Add(this.btnDeleteOwner);
-            this.Controls.Add(this.BtnClear);
-            this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.txtCDtrackID);
             this.Controls.Add(this.txtduration);
             this.Controls.Add(this.txttrackname);
@@ -469,17 +546,20 @@
             this.Controls.Add(this.Label2);
             this.Controls.Add(this.Label1);
             this.Controls.Add(this.Owners);
-            this.Controls.Add(this.DGVtracks);
             this.Controls.Add(this.TextBox2);
             this.Controls.Add(this.TextBox1);
             this.Controls.Add(this.ComboBox1);
             this.Controls.Add(this.lbgenre);
-            this.Controls.Add(this.DGVCD);
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.DGVtracks)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVCD)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGVOwner)).EndInit();
+            this.tabOwner.ResumeLayout(false);
+            this.tabPage1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -523,6 +603,11 @@
         internal System.Windows.Forms.Label Label5;
         private System.Windows.Forms.DataGridView DGVOwner;
         private System.Windows.Forms.Button txtGoogle;
-        }
+        private System.Windows.Forms.TabControl tabOwner;
+        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage tabPage2;
+        private System.Windows.Forms.TabPage tabPage3;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+    }
     }
 

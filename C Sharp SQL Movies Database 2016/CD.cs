@@ -13,5 +13,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         public String Artist { get; set; }
         public String Genre { get; set; }
         public int OwnerIDFK { get; set; }
+
+       
     }
 }

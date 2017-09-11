@@ -27,7 +27,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         {
             //change the connection string to run from your own music db
             string connectionString =
-                @"Data Source=GARYLAPTOP\sqlexpress;Initial Catalog=Music;Integrated Security=True";
+                @"Data Source=GARY-YOGA\sqlexpress;Initial Catalog=Music;Integrated Security=True";
             Connection.ConnectionString = connectionString;
             Command.Connection = Connection;
         }
