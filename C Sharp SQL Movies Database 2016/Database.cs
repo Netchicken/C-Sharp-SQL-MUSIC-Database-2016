@@ -19,12 +19,13 @@ namespace C_Sharp_SQL_Movies_Database_2016
         private SqlDataAdapter da = new SqlDataAdapter();
         private List<Tracks> myTrack = new List<Tracks>();
         private List<CD> myCD = new List<CD>();
-        private List<Owner> myOwner = new List<Owner>();
 
 
         //THE CONSTRUCTOR SETS THE DEFAULTS UPON LOADING THE CLASS
         public Database()
         {
+            //Data Source=GARY-YOGA\SQLEXPRESS;Initial Catalog=Music;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False
+
             //change the connection string to run from your own music db
             string connectionString =
                 @"Data Source=GARY-YOGA\sqlexpress;Initial Catalog=Music;Integrated Security=True";
@@ -33,7 +34,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         }
 
         //combining all together
-        public DataTable AllFillDGVWithData(string Name, string ID)
+        public DataTable FillAllDGVWithData(string Name, string ID)
         {
 
             string SQL = null;
@@ -73,69 +74,69 @@ namespace C_Sharp_SQL_Movies_Database_2016
         }
 
         #region Unused DB Calls all superceeded by AllFillDGVWithData
-        public void FillDGVOwnerWithOwner()
-        {
-            using (da = new SqlDataAdapter("select * from Owner ", Connection))
-            {//connect in to the DB and get the SQL
-                DataTable mydt = new DataTable();
-                //create a datatable as we only have one table, the Owner
-                Connection.Open();
-                //open a connection to the DB
-                da.Fill(mydt);
-                //fill the datatable from the SQL 
-                Connection.Close(); //close the connection
+        //public void FillDGVOwnerWithOwner()
+        //{
+        //using (da = new SqlDataAdapter("select * from Owner ", Connection))
+        //{//connect in to the DB and get the SQL
+        //    DataTable mydt = new DataTable();
+        //    //create a datatable as we only have one table, the Owner
+        //    Connection.Open();
+        //    //open a connection to the DB
+        //    da.Fill(mydt);
+        //    //fill the datatable from the SQL 
+        //    Connection.Close(); //close the connection
 
-                myOwner = mydt.AsEnumerable().Select(row =>
-                    new Owner
-                    {
-                        OwnerID = row.Field<int>("OwnerID"),
-                        FirstName = row.Field<string>("FirstName"),
-                        LastName = row.Field<string>("LastName")
-                    }).ToList();
+        //    myOwner = mydt.AsEnumerable().Select(row =>
+        //        new Owner
+        //        {
+        //            OwnerID = row.Field<int>("OwnerID"),
+        //            FirstName = row.Field<string>("FirstName"),
+        //            LastName = row.Field<string>("LastName")
+        //        }).ToList();
 
-                //   return mydt; //pass the datatable data to the DataGridView
-            }
+        //   return mydt; //pass the datatable data to the DataGridView
+        //    }
 
-        }
-        public DataTable FillDGVCDWithOwnerClick(string OwnerID)
-        {
-            string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + OwnerID + "' ";
-            using (da = new SqlDataAdapter(SQL, Connection))
-            {
+        //}
+        //public DataTable FillDGVCDWithOwnerClick(string OwnerID)
+        //{
+        //    //string SQL = "select Name, Artist, Genre, CDID from CD where OwnerIDFK = '" + OwnerID + "' ";
+        //using (da = new SqlDataAdapter(SQL, Connection))
+        //{
 
-                //connect in to the DB and get the SQL
-                DataTable mydt = new DataTable();
-                //create a datatable as we only have one table, the Owner
+        //    //connect in to the DB and get the SQL
+        //    DataTable mydt = new DataTable();
+        //    //create a datatable as we only have one table, the Owner
 
-                Connection.Open();
-                //open a connection to the DB
-                da.Fill(mydt);
-                //fill the datatable from the SQL 
-                Connection.Close();
-                //close the connection
+        //    Connection.Open();
+        //    //open a connection to the DB
+        //    da.Fill(mydt);
+        //    //fill the datatable from the SQL 
+        //    Connection.Close();
+        //    //close the connection
 
-                return mydt;
-            }
-        }
-        public DataTable FillDGVTracksWithCDClick(string CDID)
-        {
+        //    return mydt;
+        //    }
+        //}
+        //public DataTable FillDGVTracksWithCDClick(string CDID)
+        //{
 
-            DataTable mydt = new DataTable();
-            //create a datatable
-            string SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + CDID + "' ";
+        //DataTable mydt = new DataTable();
+        ////create a datatable
+        //string SQL = "select TrackName, TrackDuration, trackID, CDTRackID from CDTracks where CDIDFK = '" + CDID + "' ";
 
-            da = new SqlDataAdapter(SQL, Connection);
-            //'connect in to the DB and get the SQL
+        //da = new SqlDataAdapter(SQL, Connection);
+        ////'connect in to the DB and get the SQL
 
-            Connection.Open();
-            //open a connection to the DB
-            da.Fill(mydt);
-            //fill the datatable from the SQL 
-            Connection.Close();
-            //close the connection
+        //Connection.Open();
+        ////open a connection to the DB
+        //da.Fill(mydt);
+        ////fill the datatable from the SQL 
+        //Connection.Close();
+        ////close the connection
 
-            return mydt;
-        }
+        //return mydt;
+        //}
         #endregion
 
 
@@ -149,17 +150,17 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 switch (Table)
                 {
                     case "Owner":
-                        myCommand = new SqlCommand("DELETE FROM Owner WHERE OwnerID = @ID");
+                        myCommand = new SqlCommand("DELETE FROM Owner WHERE OwnerID = @ID", Connection);
                         break;
                     case "CD":
-                        myCommand = new SqlCommand("DELETE FROM CD WHERE CDID = @ID");
+                        myCommand = new SqlCommand("DELETE FROM CD WHERE CDID = @ID", Connection);
                         break;
                     case "Track":
-                        myCommand = new SqlCommand("DELETE FROM CDTracks WHERE TrackID = @ID");
+                        myCommand = new SqlCommand("DELETE FROM CDTracks WHERE TrackID = @ID", Connection);
                         break;
                 }
 
-                myCommand.Connection = Connection;
+                //  myCommand.Connection = Connection;
                 myCommand.Parameters.AddWithValue("ID", ID);
                 //use parameters to prevent SQL injections
 
@@ -205,12 +206,13 @@ namespace C_Sharp_SQL_Movies_Database_2016
         {
             try
             {
-
                 if (AddOrUpdate == "Add")
                 {
 
                     //Create a Command object  //Create a Query. Create and open a connection to SQL Server 
-                    var myCommand = new SqlCommand("INSERT INTO Owner (FirstName, LastName) " + "VALUES(@Firstname, @Lastname)", Connection);
+                    string query = "INSERT INTO Owner (FirstName, LastName) " + "VALUES(@Firstname, @Lastname)";
+
+                    var myCommand = new SqlCommand(query, Connection);
                     //create params
                     myCommand.Parameters.AddWithValue("Firstname", Firstname);
                     myCommand.Parameters.AddWithValue("Lastname", Lastname);

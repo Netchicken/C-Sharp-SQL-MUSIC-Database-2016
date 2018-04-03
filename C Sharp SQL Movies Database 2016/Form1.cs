@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mime;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
     {
         //create an instance of the Database class
         Database myDatabase = new Database();
-        Tracks myTrack = new Tracks();
-        CD myCD = new CD();
-        Owner myOwner = new Owner();
+
         public Form1()
         {
             InitializeComponent();
@@ -32,18 +31,18 @@ namespace C_Sharp_SQL_Movies_Database_2016
             DisplayDataGridViewOwner();
             //fill the combo box as an example
             comboboxfill();
-            myDatabase.FillDGVOwnerWithOwner();
+
         }
 
 
-        //LOAD THE OWNER DATAGRID
+        //LOAD THE OWNER DATAGRID using the Owner Data Transfer Object
         private void DisplayDataGridViewOwner()
         {
             //clear out the old data
             DGVOwner.DataSource = null;
             try
             {
-                DGVOwner.DataSource = myDatabase.AllFillDGVWithData("Owner", "0");
+                DGVOwner.DataSource = myDatabase.FillAllDGVWithData("Owner", "0");
                 //pass the datatable data to the DataGridView
                 DGVOwner.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.DisplayedCells);
             }
@@ -52,31 +51,50 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 MessageBox.Show(ex.Message);
             }
         }
+        private void ShowonTitleBar(int Row, int Col)
+        {
+            // this.Text = "Row " + Row + " and Col " + Col;
+            // this.Text =string.Format("Row "+ {1} +" and Col " + {2}:Row,Col);
+            this.Text = $@"Row {Row} and show me the Col {Col}";
 
+        }
         //CLICK EVENT FOR THE OWNER CELL
         private void DGVOwner_CellContentClick(Object sender, DataGridViewCellEventArgs e)
         {
+            //clear the last data entry
+            OwnerDTO.ClearData();
+            OwnerDTO.Events = e;
             int OwnerID = 0;
             //these are the cell clicks for the values in the row that you click on
             try
             {
-                OwnerID = (int)DGVOwner.Rows[e.RowIndex].Cells[0].Value;
-                txtFN.Text = DGVOwner.Rows[e.RowIndex].Cells[1].Value.ToString();
-                txtLN.Text = DGVOwner.Rows[e.RowIndex].Cells[2].Value.ToString();
+                //pass the datagridview data to the class
+                OwnerDTO.OwnerDGV = DGVOwner;
+                //extract out the data from the rows
+                OwnerDTO.OwnerDGVExtract();
+                ShowonTitleBar(e.RowIndex, e.ColumnIndex);
+                //OwnerDTO.OwnerID = (int)DGVOwner.Rows[e.RowIndex].Cells[0].Value;
+                //OwnerDTO.FirstName = DGVOwner.Rows[e.RowIndex].Cells[1].Value.ToString();
+                //OwnerDTO.LastName = DGVOwner.Rows[e.RowIndex].Cells[2].Value.ToString();
+
+                //pass the data to the textboxes
+                txtFN.Text = OwnerDTO.FirstName;
+                txtLN.Text = OwnerDTO.LastName;
+
                 //if you are clicking on a row and not outside it
                 if (e.RowIndex >= 0)
                 {
                     //Fill the next CD DGV with the OwnerID
-                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", OwnerID.ToString());
-                    DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
-                    TxtOwnerID.Text = OwnerID.ToString();
+                    DGVCD.DataSource = myDatabase.FillAllDGVWithData("CD", OwnerDTO.OwnerID.ToString());
+
+                    TxtOwnerID.Text = OwnerDTO.OwnerID.ToString();
                     //   Me.Text = OwnerID 'check to see that its working
                 }
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(" I am very sorry you have an error " + ex.Message + "Don't do that again!   ");
             }
         }
 
@@ -109,6 +127,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
         }
 
 
+
         //CLICK EVENT FOR THE CD 
 
         private void DGVCD_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -125,7 +144,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 if (e.RowIndex >= 0)
                 {
                     //  DisplayDataGridViewTracks(CDID)
-                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", CDID);
+                    DGVtracks.DataSource = myDatabase.FillAllDGVWithData("Track", CDID);
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
 
                     txtCDName.Text = CDname.Trim();
@@ -234,8 +253,8 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
                 //refresh everything
                 DisplayDataGridViewOwner();
-                DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", txtCDID.Text);
-                DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDtrackID.Text);
+                DGVCD.DataSource = myDatabase.FillAllDGVWithData("CD", txtCDID.Text);
+                DGVtracks.DataSource = myDatabase.FillAllDGVWithData("Track", txtCDtrackID.Text);
 
                 ClearAllTextBoxes(this); //clear all the textboxes afterwards
             }
@@ -257,7 +276,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                     result = myDatabase.AddOrUpdateCD(TxtOwnerID.Text, txtCDName.Text, txtCDArtist.Text, txtCDGenre.Text, txtCDID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txtCDName.Text + " Adding " + result);
-                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", (TxtOwnerID.Text));
+                    DGVCD.DataSource = myDatabase.FillAllDGVWithData("CD", (TxtOwnerID.Text));
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -285,7 +304,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                     result = myDatabase.AddOrUpdateCDTrack(txtCDID.Text, txtCDtrackID.Text, txttrackname.Text, txtduration.Text, txtTrackID.Text, "Add");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txttrackname.Text + " Adding " + result);
-                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDID.Text);
+                    DGVtracks.DataSource = myDatabase.FillAllDGVWithData("Track", txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -315,6 +334,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                 string result = null;
                 try
                 {
+
                     result = myDatabase.InsertOrUpdateOwner(txtFN.Text, txtLN.Text, TxtOwnerID.Text, "Update");
                     MessageBox.Show(txtFN.Text + " " + txtLN.Text + " Updating " + result);
                     //update the datagrid view to see new entries 
@@ -343,7 +363,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                         txtCDGenre.Text, txtCDID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txtCDName.Text + " Updating " + result);
-                    DGVCD.DataSource = myDatabase.AllFillDGVWithData("CD", (TxtOwnerID.Text));
+                    DGVCD.DataSource = myDatabase.FillAllDGVWithData("CD", (TxtOwnerID.Text));
                     //refresh the DGV
                     DGVCD.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -369,7 +389,7 @@ namespace C_Sharp_SQL_Movies_Database_2016
                         txtduration.Text, txtTrackID.Text, "Update");
                     // MsgBox(txtCDName.Text & " has been inserted successfully")
                     MessageBox.Show(txttrackname.Text + " Updating " + result);
-                    DGVtracks.DataSource = myDatabase.AllFillDGVWithData("Track", txtCDID.Text);
+                    DGVtracks.DataSource = myDatabase.FillAllDGVWithData("Track", txtCDID.Text);
                     //refresh the DGV
                     DGVtracks.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.DisplayedCells;
                 }
@@ -471,22 +491,19 @@ namespace C_Sharp_SQL_Movies_Database_2016
 
         private void txtGoogle_Click(object sender, EventArgs e)
         {
-
-
             TestForm mytestform = new TestForm();
             mytestform.Show();
             BridgeToFormTest.DataIn = txtCDName.Text;
 
-
-            if (string.IsNullOrEmpty(txtCDName.Text))
-            {
-                // MessageBox.Show("Click on a CD first Dimwit");
-            }
-            else
+            if (!string.IsNullOrEmpty(txtCDName.Text))
             {
                 FrmDetails frm = new FrmDetails(this);
                 frm.Show();
 
+            }
+            else
+            {
+                MessageBox.Show("Click on a CD first Dimwit");
             }
         }
 
